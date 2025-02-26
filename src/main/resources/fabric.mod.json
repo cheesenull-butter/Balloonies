@@ -3,20 +3,22 @@
 	"id": "balloonies",
 	"version": "${version}",
 	"name": "Balloonies",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "We found you",
 	"authors": [
-		"Me!"
+		"CheeseNull Butter"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"sources": "https://github.com/cheesenull-butter/Balloonies"
 	},
-	"license": "CC0-1.0",
+	"license": "MIT License",
 	"icon": "assets/balloonies/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
 			"cheesenull.balloonies.Balloonies"
+		],
+		"client": [
+			"cheesenull.balloonies.BallooniesClient"
 		],
 		"fabric-datagen": [
 			"cheesenull.balloonies.BallooniesDataGenerator"

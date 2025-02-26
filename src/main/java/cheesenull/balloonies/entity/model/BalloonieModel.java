@@ -9,7 +9,7 @@ import net.minecraft.client.util.math.MatrixStack;
 // Made with Blockbench 4.12.3
 // Exported for Minecraft version 1.17+ for Yarn
 // Paste this class into your mod and generate all required imports
-public class BalloonieModel extends HierarchyModel {
+public class BalloonieModel extends EntityModel {
 	private final ModelPart balloonie;
 
 	public BalloonieModel(ModelPart root) {

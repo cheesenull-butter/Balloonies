@@ -1,0 +1,53 @@
+package cheesenull.balloonies.block;
+
+import cheesenull.balloonies.Balloonies;
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.minecraft.block.*;
+import net.minecraft.block.piston.PistonBehavior;
+import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroups;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.util.Identifier;
+
+public class BallooniesBlocks {
+
+    public static final Block BLUE_ROSE = registerBlock("blue_rose",
+            new FlowerBlock(StatusEffects.NAUSEA, 3.0F,
+                    AbstractBlock.Settings.create()
+                            .mapColor(MapColor.DARK_GREEN)
+                            .noCollision()
+                            .breakInstantly()
+                            .sounds(BlockSoundGroup.GRASS)
+                            .offset(AbstractBlock.OffsetType.XZ)
+                            .pistonBehavior(PistonBehavior.DESTROY)));
+    public static final Block POTTED_BLUE_ROSE = registerBlock("potted_blue_rose",
+            new FlowerPotBlock(BLUE_ROSE, AbstractBlock.Settings.create()
+                    .breakInstantly()
+                    .nonOpaque()
+                    .pistonBehavior(PistonBehavior.DESTROY)));
+
+    private static Block registerBlock(String name, Block block) {
+        registerBlockItem(name, block);
+        return Registry.register(Registries.BLOCK, Identifier.of(Balloonies.MOD_ID, name), block);
+    }
+
+    private static void registerBlockItem(String name, Block block) {
+        Registry.register(Registries.ITEM, Identifier.of(Balloonies.MOD_ID, name),
+                new BlockItem(block, new Item.Settings()));
+    }
+
+    public static void registerBlocks() {
+        Balloonies.LOGGER.info("Registering Mod Blocks for " + Balloonies.MOD_ID);
+
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.NATURAL).register(entries -> {
+
+            entries.addAfter(Blocks.WITHER_ROSE, BLUE_ROSE);
+
+        });
+    }
+
+}

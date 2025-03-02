@@ -7,6 +7,7 @@ import net.minecraft.entity.ai.control.MoveControl;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
@@ -20,8 +21,12 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumSet;
+import java.util.Random;
 
 public class BalloonieEntity extends FlyingEntity {
+
+    Random ran = new Random();
+    int chance = ran.nextInt(0, 10);
 
     public BalloonieEntity(EntityType<? extends FlyingEntity> entityType, World world) {
         super(entityType, world);
@@ -32,20 +37,33 @@ public class BalloonieEntity extends FlyingEntity {
 
     public static DefaultAttributeContainer.Builder createBalloonieAttributes() {
         return MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 1);
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 100.0F);
     }
 
     @Override
     protected void initGoals() {
+        this.goalSelector.add(1, new FlyStrightlyGoal(this));
+    }
 
-        this.goalSelector.add(5, new FlyStrightlyGoal(this));
+    @Override
+    public boolean damage(DamageSource source, float amount) {
+
+        if (chance < 8) {
+            discard();
+        } else {
+            System.out.print("j");
+        }
+
+        return super.damage(source, amount);
 
     }
 
     @Override
     protected void initDataTracker(DataTracker.Builder builder) {
+
         super.initDataTracker(builder);
         builder.add(DATA_ID_TYPE_VARIANT, 0);
+
     }
 
     public BalloonieVariant getVariant() {
@@ -62,22 +80,29 @@ public class BalloonieEntity extends FlyingEntity {
 
     @Override
     public void writeCustomDataToNbt(NbtCompound nbt) {
+
         super.writeCustomDataToNbt(nbt);
         nbt.putInt("Variant", this.getTypeVariant());
+
     }
 
     @Override
     public void readCustomDataFromNbt(NbtCompound nbt) {
+
         super.readCustomDataFromNbt(nbt);
         this.dataTracker.set(DATA_ID_TYPE_VARIANT, nbt.getInt("Variant"));
+
     }
 
     @Override
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason,
                                  @Nullable EntityData entityData) {
+
         BalloonieVariant variant = Util.getRandom(BalloonieVariant.values(), this.random);
         setVariant(variant);
+
         return super.initialize(world, difficulty, spawnReason, entityData);
+
     }
 
     private static class FlyStrightlyGoal extends Goal {
@@ -104,8 +129,9 @@ public class BalloonieEntity extends FlyingEntity {
                 double d = moveControl.getTargetX() - this.balloonie.getX();
                 double e = moveControl.getTargetY() - this.balloonie.getY();
                 double f = moveControl.getTargetZ() - this.balloonie.getZ();
+
                 double g = d * d + e * e + f * f;
-                return g < 1.0 || g > 3600.0;
+                return g < 1.0F || g > 3600.0F;
 
             }
         }

@@ -1,7 +1,9 @@
 package cheesenull.balloonies;
 
+import cheesenull.balloonies.block.BallooniesBlocks;
 import cheesenull.balloonies.entity.BallooniesEntities;
 import cheesenull.balloonies.entity.custom.BalloonieEntity;
+import cheesenull.balloonies.entity.custom.ValloonieEntity;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
@@ -16,10 +18,13 @@ public class Balloonies implements ModInitializer {
 	@Override
 	public void onInitialize() {
 
+		BallooniesBlocks.registerBlocks();
 		BallooniesEntities.registerModEntities();
 
 		FabricDefaultAttributeRegistry.register(BallooniesEntities.BALLOONIE,
 				BalloonieEntity.createBalloonieAttributes());
+		FabricDefaultAttributeRegistry.register(BallooniesEntities.VALLOONIE,
+				ValloonieEntity.createValloonieAttributes());
 
 		LOGGER.info("Hello Fabric world!");
 

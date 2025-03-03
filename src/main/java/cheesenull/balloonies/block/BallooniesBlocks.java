@@ -17,18 +17,10 @@ public class BallooniesBlocks {
 
     public static final Block BLUE_ROSE = registerBlock("blue_rose",
             new FlowerBlock(StatusEffects.NAUSEA, 3.0F,
-                    AbstractBlock.Settings.create()
-                            .mapColor(MapColor.DARK_GREEN)
-                            .noCollision()
-                            .breakInstantly()
-                            .sounds(BlockSoundGroup.GRASS)
-                            .offset(AbstractBlock.OffsetType.XZ)
-                            .pistonBehavior(PistonBehavior.DESTROY)));
-    public static final Block POTTED_BLUE_ROSE = registerBlock("potted_blue_rose",
-            new FlowerPotBlock(BLUE_ROSE, AbstractBlock.Settings.create()
-                    .breakInstantly()
-                    .nonOpaque()
-                    .pistonBehavior(PistonBehavior.DESTROY)));
+                    AbstractBlock.Settings.copy(Blocks.POPPY)));
+    public static final Block POTTED_BLUE_ROSE = Registry.register(Registries.BLOCK,
+            Identifier.of(Balloonies.MOD_ID, "potted_blue_rose"),
+            new FlowerPotBlock(BLUE_ROSE, AbstractBlock.Settings.copy(Blocks.POTTED_POPPY).nonOpaque()));
 
     private static Block registerBlock(String name, Block block) {
         registerBlockItem(name, block);

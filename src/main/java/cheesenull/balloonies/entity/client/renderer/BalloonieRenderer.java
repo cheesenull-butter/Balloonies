@@ -26,6 +26,8 @@ public class BalloonieRenderer extends MobEntityRenderer<BalloonieEntity, Single
                         Identifier.of(Balloonies.MOD_ID, "textures/entity/balloonie/balloonie_blue.png"));
                 map.put(BalloonieVariant.LIGHT_BLUE,
                         Identifier.of(Balloonies.MOD_ID, "textures/entity/balloonie/balloonie_light_blue.png"));
+                map.put(BalloonieVariant.WHITE,
+                        Identifier.of(Balloonies.MOD_ID, "textures/entity/balloonie/balloonie_white.png"));
             });
 
     public BalloonieRenderer(EntityRendererFactory.Context context) {

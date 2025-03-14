@@ -6,7 +6,8 @@ import java.util.Comparator;
 public enum BalloonieVariant {
 
     BLUE(0),
-    LIGHT_BLUE(1);
+    LIGHT_BLUE(1),
+    WHITE(2),;
 
     private static final BalloonieVariant[] BY_ID = Arrays.stream(values()).sorted(Comparator.
             comparingInt(BalloonieVariant::getId)).toArray(BalloonieVariant[]::new);

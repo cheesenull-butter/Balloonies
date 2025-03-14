@@ -13,11 +13,13 @@ public class BalloonieModel<T extends BalloonieEntity> extends SinglePartEntityM
 
 	public static final EntityModelLayer BALLOONIE =
 			new EntityModelLayer(Identifier.of(Balloonies.MOD_ID, "balloonie"), "main");
+
 	private final ModelPart balloonie;
 
 	public BalloonieModel(ModelPart root) {
 		this.balloonie = root.getChild("balloonie");
 	}
+
 	public static TexturedModelData getTexturedModelData() {
 		ModelData modelData = new ModelData();
 		ModelPartData modelPartData = modelData.getRoot();

@@ -1,7 +1,10 @@
 package cheesenull.balloonies.entity.custom;
 
+import cheesenull.balloonies.block.BallooniesBlocks;
+import cheesenull.balloonies.entity.BallooniesEntities;
 import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.control.MoveControl;
 import net.minecraft.entity.ai.goal.Goal;
@@ -13,6 +16,7 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.FlyingEntity;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Util;
 import net.minecraft.world.LocalDifficulty;
@@ -26,7 +30,7 @@ import java.util.Random;
 public class BalloonieEntity extends FlyingEntity {
 
     Random ran = new Random();
-    int chance = ran.nextInt(0, 10);
+    int pool = ran.nextInt(0, 10);
 
     public BalloonieEntity(EntityType<? extends FlyingEntity> entityType, World world) {
         super(entityType, world);
@@ -42,19 +46,50 @@ public class BalloonieEntity extends FlyingEntity {
 
     @Override
     protected void initGoals() {
-        this.goalSelector.add(1, new FlyStrightlyGoal(this));
+        this.goalSelector.add(1, new FlyStraightlyGoal(this));
     }
 
     @Override
     public boolean damage(DamageSource source, float amount) {
 
-        if (chance < 8) {
-            discard();
+        if (getTypeVariant() == 2) {
+
+            if (pool < 8) {
+
+                discard();
+
+                for (int i = 0; i < 5; i++) {
+
+                    BallooningEntity ballooning =
+                            new BallooningEntity(BallooniesEntities.BALLOONING, getWorld());
+                    ballooning.refreshPositionAndAngles(
+                            getPos().getX(), getPos().getY(), getPos().getZ(),
+                            0, 0);
+                    getWorld().spawnEntity(ballooning);
+
+                    double velocityX = (getWorld().random.nextDouble() - 0.5) * 2;
+                    double velocityY = getWorld().random.nextDouble() * 0.5 + 0.5;
+                    double velocityZ = (getWorld().random.nextDouble() - 0.5) * 2;
+                    ballooning.setVelocity(velocityX, velocityY, velocityZ);
+
+                }
+
+
+            } else {
+
+                ItemStack itemStack = new ItemStack(BallooniesBlocks.BLUE_ROSE.asItem());
+                getWorld().spawnEntity(new ItemEntity(getWorld(),
+                        getPos().getX(), getPos().getY(), getPos().getZ(), itemStack));
+
+                discard();
+
+            }
+
         } else {
-            System.out.print("j");
+            discard();
         }
 
-        return super.damage(source, amount);
+        return true;
 
     }
 
@@ -105,11 +140,11 @@ public class BalloonieEntity extends FlyingEntity {
 
     }
 
-    private static class FlyStrightlyGoal extends Goal {
+    private static class FlyStraightlyGoal extends Goal {
 
         private final BalloonieEntity balloonie;
 
-        public FlyStrightlyGoal(BalloonieEntity balloonie) {
+        public FlyStraightlyGoal(BalloonieEntity balloonie) {
 
             this.balloonie = balloonie;
             this.setControls(EnumSet.of(Control.MOVE));

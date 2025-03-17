@@ -2,10 +2,8 @@ package cheesenull.balloonies.entity.custom;
 
 import cheesenull.balloonies.block.BallooniesBlocks;
 import cheesenull.balloonies.entity.BallooniesEntities;
-import net.minecraft.entity.EntityData;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ItemEntity;
-import net.minecraft.entity.SpawnReason;
+import net.minecraft.block.Blocks;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.control.MoveControl;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -14,11 +12,15 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.entity.mob.CreeperEntity;
 import net.minecraft.entity.mob.FlyingEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Util;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
@@ -30,7 +32,6 @@ import java.util.Random;
 public class BalloonieEntity extends FlyingEntity {
 
     Random ran = new Random();
-    int pool = ran.nextInt(0, 10);
 
     public BalloonieEntity(EntityType<? extends FlyingEntity> entityType, World world) {
         super(entityType, world);
@@ -52,41 +53,104 @@ public class BalloonieEntity extends FlyingEntity {
     @Override
     public boolean damage(DamageSource source, float amount) {
 
-        if (getTypeVariant() == 2) {
+        if (getTypeVariant() == 4) {
+
+            int pool = ran.nextInt(0, 10);
 
             if (pool < 8) {
 
-                discard();
-
                 for (int i = 0; i < 5; i++) {
 
-                    BallooningEntity ballooning =
-                            new BallooningEntity(BallooniesEntities.BALLOONING, getWorld());
-                    ballooning.refreshPositionAndAngles(
-                            getPos().getX(), getPos().getY(), getPos().getZ(),
-                            0, 0);
-                    getWorld().spawnEntity(ballooning);
+                    if (!getWorld().isClient()) {
 
-                    double velocityX = (getWorld().random.nextDouble() - 0.5) * 2;
-                    double velocityY = getWorld().random.nextDouble() * 0.5 + 0.5;
-                    double velocityZ = (getWorld().random.nextDouble() - 0.5) * 2;
-                    ballooning.setVelocity(velocityX, velocityY, velocityZ);
+                        BallooningEntity ballooning =
+                                new BallooningEntity(BallooniesEntities.BALLOONING, getWorld());
+                        ballooning.refreshPositionAndAngles(
+                                getPos().getX(), getPos().getY(), getPos().getZ(),
+                                0, 0);
+                        getWorld().spawnEntity(ballooning);
+
+                        double velocityX = (getWorld().random.nextDouble() - 0.5) * 2;
+                        double velocityY = getWorld().random.nextDouble() * 0.5 + 0.5;
+                        double velocityZ = (getWorld().random.nextDouble() - 0.5) * 2;
+                        ballooning.setVelocity(velocityX, velocityY, velocityZ);
+
+                    }
 
                 }
 
 
             } else {
 
-                ItemStack itemStack = new ItemStack(BallooniesBlocks.BLUE_ROSE.asItem());
-                getWorld().spawnEntity(new ItemEntity(getWorld(),
-                        getPos().getX(), getPos().getY(), getPos().getZ(), itemStack));
+                if (!getWorld().isClient()) {
 
-                discard();
+                    ItemStack itemStack = new ItemStack(BallooniesBlocks.BLUE_ROSE.asItem());
+                    getWorld().spawnEntity(new ItemEntity(getWorld(),
+                            getPos().getX(), getPos().getY(), getPos().getZ(), itemStack));
+
+                }
 
             }
 
-        } else {
             discard();
+
+        } else {
+
+            int pool = ran.nextInt(2, 3);
+
+            if (pool == 0) {
+
+                for (int x = 0; x < 2; x++) {
+                    for (int y = 0; y < 2; y++) {
+                        for (int z = 0; z < 2; z++) {
+
+                            FallingBlockEntity blockEntity =
+                                    FallingBlockEntity.spawnFromBlock(getWorld(), getBlockPos().add(x, y ,z),
+                                            Blocks.BOOKSHELF.getDefaultState());
+                            ItemStack itemStack = new ItemStack(Items.BOOK);
+
+                            getWorld().spawnEntity(blockEntity);
+                            getWorld().spawnEntity(new ItemEntity(getWorld(),
+                                    getPos().getX(), getPos().getY(), getPos().getZ(), itemStack));
+
+                        }
+                    }
+                }
+
+            } else if (pool == 1) {
+
+                if (!getWorld().isClient()) {
+
+                    for (int i = 0; i < 5; i++) {
+
+                        CreeperEntity creeper =
+                                new CreeperEntity(EntityType.CREEPER, getWorld());
+                        creeper.refreshPositionAndAngles(
+                                getPos().getX(), getPos().getY(), getPos().getZ(),
+                                0, 0);
+                        getWorld().spawnEntity(creeper);
+
+                        double velocityX = (getWorld().random.nextDouble() - 0.5) * 2;
+                        double velocityY = getWorld().random.nextDouble() * 0.5 + 0.5;
+                        double velocityZ = (getWorld().random.nextDouble() - 0.5) * 2;
+                        creeper.setVelocity(velocityX, velocityY, velocityZ);
+
+                    }
+
+                }
+
+            } else if (pool == 2) {
+
+                if (!getWorld().isClient()) {
+                    if (getWorld() instanceof ServerWorld serverWorld) {
+                        serverWorld.setWeather(0, 6000, true, true);
+                    }
+                }
+
+            }
+
+            discard();
+
         }
 
         return true;
@@ -130,13 +194,22 @@ public class BalloonieEntity extends FlyingEntity {
     }
 
     @Override
-    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason,
-                                 @Nullable EntityData entityData) {
+    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty,
+                                 SpawnReason spawnReason, @Nullable EntityData entityData) {
 
         BalloonieVariant variant = Util.getRandom(BalloonieVariant.values(), this.random);
         setVariant(variant);
 
         return super.initialize(world, difficulty, spawnReason, entityData);
+
+    }
+
+    @Override
+    public void onDeath(DamageSource damageSource) {
+
+        super.onDeath(damageSource);
+
+
 
     }
 

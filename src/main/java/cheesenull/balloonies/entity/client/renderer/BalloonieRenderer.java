@@ -24,8 +24,12 @@ public class BalloonieRenderer extends MobEntityRenderer<BalloonieEntity, Single
             Util.make(Maps.newEnumMap(BalloonieVariant.class), map -> {
                 map.put(BalloonieVariant.BLUE,
                         Identifier.of(Balloonies.MOD_ID, "textures/entity/balloonie/balloonie_blue.png"));
-                map.put(BalloonieVariant.LIGHT_BLUE,
-                        Identifier.of(Balloonies.MOD_ID, "textures/entity/balloonie/balloonie_light_blue.png"));
+                map.put(BalloonieVariant.GREEN,
+                        Identifier.of(Balloonies.MOD_ID, "textures/entity/balloonie/balloonie_green.png"));
+                map.put(BalloonieVariant.ORANGE,
+                        Identifier.of(Balloonies.MOD_ID, "textures/entity/balloonie/balloonie_orange.png"));
+                map.put(BalloonieVariant.RED,
+                        Identifier.of(Balloonies.MOD_ID, "textures/entity/balloonie/balloonie_red.png"));
                 map.put(BalloonieVariant.WHITE,
                         Identifier.of(Balloonies.MOD_ID, "textures/entity/balloonie/balloonie_white.png"));
             });

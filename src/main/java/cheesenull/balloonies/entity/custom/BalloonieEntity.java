@@ -12,26 +12,19 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.mob.CreeperEntity;
 import net.minecraft.entity.mob.FlyingEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Util;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumSet;
-import java.util.Random;
 
 public class BalloonieEntity extends FlyingEntity {
-
-    Random ran = new Random();
 
     public BalloonieEntity(EntityType<? extends FlyingEntity> entityType, World world) {
         super(entityType, world);
@@ -53,102 +46,18 @@ public class BalloonieEntity extends FlyingEntity {
     @Override
     public boolean damage(DamageSource source, float amount) {
 
+
+
+        BallooniePools balPools = new BallooniePools();
+
         if (getTypeVariant() == 4) {
 
-            int pool = ran.nextInt(0, 10);
-
-            if (pool < 8) {
-
-                for (int i = 0; i < 5; i++) {
-
-                    if (!getWorld().isClient()) {
-
-                        BallooningEntity ballooning =
-                                new BallooningEntity(BallooniesEntities.BALLOONING, getWorld());
-                        ballooning.refreshPositionAndAngles(
-                                getPos().getX(), getPos().getY(), getPos().getZ(),
-                                0, 0);
-                        getWorld().spawnEntity(ballooning);
-
-                        double velocityX = (getWorld().random.nextDouble() - 0.5) * 2;
-                        double velocityY = getWorld().random.nextDouble() * 0.5 + 0.5;
-                        double velocityZ = (getWorld().random.nextDouble() - 0.5) * 2;
-                        ballooning.setVelocity(velocityX, velocityY, velocityZ);
-
-                    }
-
-                }
-
-
-            } else {
-
-                if (!getWorld().isClient()) {
-
-                    ItemStack itemStack = new ItemStack(BallooniesBlocks.BLUE_ROSE.asItem());
-                    getWorld().spawnEntity(new ItemEntity(getWorld(),
-                            getPos().getX(), getPos().getY(), getPos().getZ(), itemStack));
-
-                }
-
-            }
-
+            balPools.whiteBallooniePool(this.getWorld(), this.getPos());
             discard();
 
         } else {
 
-            int pool = ran.nextInt(2, 3);
-
-            if (pool == 0) {
-
-                for (int x = 0; x < 2; x++) {
-                    for (int y = 0; y < 2; y++) {
-                        for (int z = 0; z < 2; z++) {
-
-                            FallingBlockEntity blockEntity =
-                                    FallingBlockEntity.spawnFromBlock(getWorld(), getBlockPos().add(x, y ,z),
-                                            Blocks.BOOKSHELF.getDefaultState());
-                            ItemStack itemStack = new ItemStack(Items.BOOK);
-
-                            getWorld().spawnEntity(blockEntity);
-                            getWorld().spawnEntity(new ItemEntity(getWorld(),
-                                    getPos().getX(), getPos().getY(), getPos().getZ(), itemStack));
-
-                        }
-                    }
-                }
-
-            } else if (pool == 1) {
-
-                if (!getWorld().isClient()) {
-
-                    for (int i = 0; i < 5; i++) {
-
-                        CreeperEntity creeper =
-                                new CreeperEntity(EntityType.CREEPER, getWorld());
-                        creeper.refreshPositionAndAngles(
-                                getPos().getX(), getPos().getY(), getPos().getZ(),
-                                0, 0);
-                        getWorld().spawnEntity(creeper);
-
-                        double velocityX = (getWorld().random.nextDouble() - 0.5) * 2;
-                        double velocityY = getWorld().random.nextDouble() * 0.5 + 0.5;
-                        double velocityZ = (getWorld().random.nextDouble() - 0.5) * 2;
-                        creeper.setVelocity(velocityX, velocityY, velocityZ);
-
-                    }
-
-                }
-
-            } else if (pool == 2) {
-
-                if (!getWorld().isClient()) {
-                    if (getWorld() instanceof ServerWorld serverWorld) {
-                        serverWorld.setWeather(0, 6000, true, true);
-                    }
-                }
-
-            }
-
+            balPools.ballooniePool(this.getWorld(), this.getPos(), this.getBlockPos());
             discard();
 
         }

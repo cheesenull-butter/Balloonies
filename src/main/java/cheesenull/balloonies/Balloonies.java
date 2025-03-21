@@ -5,6 +5,7 @@ import cheesenull.balloonies.entity.BallooniesEntities;
 import cheesenull.balloonies.entity.custom.BalloonieEntity;
 import cheesenull.balloonies.entity.custom.BallooningEntity;
 import cheesenull.balloonies.particle.BallooniesParticles;
+import cheesenull.balloonies.world.gen.BallooniesWorldGeneration;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
@@ -23,6 +24,8 @@ public class Balloonies implements ModInitializer {
 		BallooniesEntities.registerModEntities();
 
 		BallooniesParticles.registerParticles();
+
+		BallooniesWorldGeneration.generateModWorldGen();
 
 		FabricDefaultAttributeRegistry.register(BallooniesEntities.BALLOONIE,
 				BalloonieEntity.createBalloonieAttributes());

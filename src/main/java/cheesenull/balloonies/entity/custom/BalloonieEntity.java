@@ -1,8 +1,5 @@
 package cheesenull.balloonies.entity.custom;
 
-import cheesenull.balloonies.block.BallooniesBlocks;
-import cheesenull.balloonies.entity.BallooniesEntities;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.control.MoveControl;
 import net.minecraft.entity.ai.goal.Goal;
@@ -14,7 +11,6 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.FlyingEntity;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Util;
 import net.minecraft.world.LocalDifficulty;
@@ -40,7 +36,16 @@ public class BalloonieEntity extends FlyingEntity {
 
     @Override
     protected void initGoals() {
+        this.goalSelector.add(0, new FlyUpGoal(this));
         this.goalSelector.add(1, new FlyStraightlyGoal(this));
+    }
+
+    @Override
+    public void tick() {
+
+        super.tick();
+        this.setYaw(0.0F);
+
     }
 
     @Override
@@ -114,12 +119,8 @@ public class BalloonieEntity extends FlyingEntity {
     }
 
     @Override
-    public void onDeath(DamageSource damageSource) {
-
-        super.onDeath(damageSource);
-
-
-
+    public boolean canImmediatelyDespawn(double distanceSquared) {
+        return false;
     }
 
     private static class FlyStraightlyGoal extends Goal {
@@ -161,6 +162,34 @@ public class BalloonieEntity extends FlyingEntity {
 
             double bobbingY = Math.sin(this.balloonie.age * 0.05F) * 0.01F;
             this.balloonie.setVelocity(0.0F, bobbingY, 0.05F);
+
+        }
+
+    }
+
+    private static class FlyUpGoal extends Goal {
+
+        private final BalloonieEntity balloonie;
+
+        public FlyUpGoal(BalloonieEntity balloonie) {
+
+            this.balloonie = balloonie;
+            this.setControls(EnumSet.of(Control.MOVE));
+
+        }
+
+        public boolean canStart() {
+
+            return balloonie.getPos().getY() < 80;
+        }
+
+        public boolean shouldContinue() {
+            return false;
+        }
+
+        public void start() {
+
+            this.balloonie.setVelocity(0.0F, 0.05F, 0.05F);
 
         }
 

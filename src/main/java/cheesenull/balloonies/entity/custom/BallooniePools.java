@@ -26,7 +26,7 @@ public class BallooniePools {
 
     public void ballooniePool(World world, Vec3d pos, BlockPos blockPos) {
 
-        int pool = ran.nextInt(2, 3);
+        int pool = ran.nextInt(0, 3);
 
         switch (pool) {
 
@@ -75,12 +75,12 @@ public class BallooniePools {
 
                 if (!world.isClient()) {
 
-                    LightningEntity lightning = new LightningEntity(EntityType.LIGHTNING_BOLT, world);
-                    world.spawnEntity(lightning);
-
                     if (world instanceof ServerWorld serverWorld) {
                         serverWorld.setWeather(0, 6000, true, true);
                     }
+
+                    LightningEntity lightning = new LightningEntity(EntityType.LIGHTNING_BOLT, world);
+                    world.spawnEntity(lightning);
 
                 }
 

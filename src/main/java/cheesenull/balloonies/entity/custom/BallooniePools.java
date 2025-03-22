@@ -49,6 +49,8 @@ public class BallooniePools {
                     }
                 }
 
+                break;
+
             case 1:
 
                 if (!world.isClient()) {
@@ -71,6 +73,8 @@ public class BallooniePools {
 
                 }
 
+                break;
+
             case 2:
 
                 if (!world.isClient()) {
@@ -83,6 +87,8 @@ public class BallooniePools {
                     world.spawnEntity(lightning);
 
                 }
+
+                break;
 
         }
 

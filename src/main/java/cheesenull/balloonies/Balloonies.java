@@ -1,6 +1,7 @@
 package cheesenull.balloonies;
 
 import cheesenull.balloonies.block.BallooniesBlocks;
+import cheesenull.balloonies.effect.BallooniesEffects;
 import cheesenull.balloonies.entity.BallooniesEntities;
 import cheesenull.balloonies.entity.custom.BalloonieEntity;
 import cheesenull.balloonies.entity.custom.BallooningEntity;
@@ -24,6 +25,8 @@ public class Balloonies implements ModInitializer {
 		BallooniesEntities.registerModEntities();
 
 		BallooniesParticles.registerParticles();
+
+		BallooniesEffects.registerEffects();
 
 		BallooniesWorldGeneration.generateModWorldGen();
 

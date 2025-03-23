@@ -1,6 +1,7 @@
 package cheesenull.balloonies;
 
 import cheesenull.balloonies.block.BallooniesBlocks;
+import cheesenull.balloonies.effect.custom.DistortionShader;
 import cheesenull.balloonies.entity.BallooniesEntities;
 import cheesenull.balloonies.entity.client.BalloonieModel;
 import cheesenull.balloonies.entity.client.BallooningModel;
@@ -19,6 +20,8 @@ public class BallooniesClient implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
+
+		DistortionShader.init();
 
 		BlockRenderLayerMap.INSTANCE.putBlock(BallooniesBlocks.BLUE_ROSE, RenderLayer.getCutout());
 		BlockRenderLayerMap.INSTANCE.putBlock(BallooniesBlocks.POTTED_BLUE_ROSE, RenderLayer.getCutout());

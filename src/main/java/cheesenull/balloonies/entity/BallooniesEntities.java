@@ -20,7 +20,7 @@ public class BallooniesEntities {
             EntityType.Builder.create(BallooningEntity::new, SpawnGroup.CREATURE)
                     .dimensions(0.625F, 0.625F).build());
 
-    public static void registerModEntities() {
+    public static void registerEntities() {
         Balloonies.LOGGER.info("Registering Mod Entities for " + Balloonies.MOD_ID);
     }
 

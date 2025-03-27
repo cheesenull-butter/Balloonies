@@ -6,6 +6,7 @@ import cheesenull.balloonies.entity.BallooniesEntities;
 import cheesenull.balloonies.entity.custom.BalloonieEntity;
 import cheesenull.balloonies.entity.custom.BallooningEntity;
 import cheesenull.balloonies.particle.BallooniesParticles;
+import cheesenull.balloonies.sound.BallooniesSounds;
 import cheesenull.balloonies.world.gen.BallooniesWorldGeneration;
 import net.fabricmc.api.ModInitializer;
 
@@ -22,11 +23,11 @@ public class Balloonies implements ModInitializer {
 	public void onInitialize() {
 
 		BallooniesBlocks.registerBlocks();
-		BallooniesEntities.registerModEntities();
+		BallooniesEntities.registerEntities();
 
 		BallooniesParticles.registerParticles();
-
 		BallooniesEffects.registerEffects();
+		BallooniesSounds.registerSounds();
 
 		BallooniesWorldGeneration.generateModWorldGen();
 

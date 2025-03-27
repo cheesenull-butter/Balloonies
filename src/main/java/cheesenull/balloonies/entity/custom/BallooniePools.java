@@ -2,15 +2,18 @@ package cheesenull.balloonies.entity.custom;
 
 import cheesenull.balloonies.block.BallooniesBlocks;
 import cheesenull.balloonies.entity.BallooniesEntities;
+import cheesenull.balloonies.sound.BallooniesSounds;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.FallingBlockEntity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LightningEntity;
 import net.minecraft.entity.mob.CreeperEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -24,7 +27,7 @@ public class BallooniePools {
     public BallooniePools() {
     }
 
-    public void ballooniePool(World world, Vec3d pos, BlockPos blockPos) {
+    public void ballooniePool(World world, BlockPos pos) {
 
         int pool = ran.nextInt(0, 3);
 
@@ -37,7 +40,7 @@ public class BallooniePools {
                         for (int z = 0; z < 2; z++) {
 
                             FallingBlockEntity blockEntity =
-                                    FallingBlockEntity.spawnFromBlock(world, blockPos.add(x, y, z),
+                                    FallingBlockEntity.spawnFromBlock(world, pos.add(x, y, z),
                                             Blocks.BOOKSHELF.getDefaultState());
                             ItemStack itemStack = new ItemStack(Items.BOOK);
 
@@ -94,7 +97,7 @@ public class BallooniePools {
 
     }
 
-    public void whiteBallooniePool(World world, Vec3d pos) {
+    public void whiteBallooniePool(World world, BlockPos pos, PlayerEntity player) {
 
         int pool = ran.nextInt(0, 10);
 
@@ -109,6 +112,8 @@ public class BallooniePools {
                     ballooning.refreshPositionAndAngles(
                             pos.getX(), pos.getY(), pos.getZ(),
                             0, 0);
+
+                    world.playSound(player, pos, BallooniesSounds.LOBOTOMY, SoundCategory.HOSTILE);
                     world.spawnEntity(ballooning);
 
                     double velocityX = (world.random.nextDouble() - 0.5) * 2;

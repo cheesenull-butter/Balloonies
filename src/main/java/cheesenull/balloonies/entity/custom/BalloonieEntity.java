@@ -11,6 +11,7 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.FlyingEntity;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Util;
 import net.minecraft.world.LocalDifficulty;
@@ -51,18 +52,21 @@ public class BalloonieEntity extends FlyingEntity {
     @Override
     public boolean damage(DamageSource source, float amount) {
 
-
-
         BallooniePools balPools = new BallooniePools();
+        PlayerEntity player = null;
+
+        if (source.getAttacker() instanceof PlayerEntity) {
+            player = (PlayerEntity) source.getAttacker();
+        }
 
         if (getTypeVariant() == 4) {
 
-            balPools.whiteBallooniePool(this.getWorld(), this.getPos());
+            balPools.whiteBallooniePool(this.getWorld(), this.getBlockPos(), player);
             discard();
 
         } else {
 
-            balPools.ballooniePool(this.getWorld(), this.getPos(), this.getBlockPos());
+            balPools.ballooniePool(this.getWorld(), this.getBlockPos());
             discard();
 
         }

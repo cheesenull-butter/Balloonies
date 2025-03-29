@@ -9,12 +9,15 @@ import net.minecraft.entity.FallingBlockEntity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LightningEntity;
 import net.minecraft.entity.mob.CreeperEntity;
+import net.minecraft.entity.mob.SkeletonEntity;
+import net.minecraft.entity.passive.BatEntity;
 import net.minecraft.entity.projectile.FireworkRocketEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -30,7 +33,9 @@ public class BallooniePools {
 
     public void ballooniePool(World world, BlockPos pos) {
 
-        int pool = ran.nextInt(5, 6);
+        int pool = ran.nextInt(6, 7);
+
+        world.playSound(null, pos, BallooniesSounds.POP, SoundCategory.NEUTRAL);
 
         if (!world.isClient()) {
 
@@ -61,11 +66,8 @@ public class BallooniePools {
 
                     for (int i = 0; i < 5; i++) {
 
-                        CreeperEntity creeper =
-                                new CreeperEntity(EntityType.CREEPER, world);
-                        creeper.refreshPositionAndAngles(
-                                pos.getX(), pos.getY(), pos.getZ(),
-                                0, 0);
+                        CreeperEntity creeper = new CreeperEntity(EntityType.CREEPER, world);
+                        creeper.refreshPositionAndAngles(pos.getX(), pos.getY(), pos.getZ(), 0, 0);
                         world.spawnEntity(creeper);
 
                         double velocityX = (world.random.nextDouble() - 0.5) * 2;
@@ -134,6 +136,26 @@ public class BallooniePools {
 
                     break;
 
+                case 6:
+
+                    for (int i = 0; i < 5; i++) {
+
+                        BatEntity bat = new BatEntity(EntityType.BAT, world);
+                        SkeletonEntity skeleton = new SkeletonEntity(EntityType.SKELETON, world);
+
+                        bat.refreshPositionAndAngles(pos.getX(), pos.getY(), pos.getZ(), 0, 0);
+                        skeleton.refreshPositionAndAngles(pos.getX(), pos.getY(), pos.getZ(), 0, 0);
+
+                        world.spawnEntity(bat);
+                        world.spawnEntity(skeleton);
+
+                        skeleton.setStackInHand(Hand.MAIN_HAND, new ItemStack(Items.BOW));
+                        skeleton.startRiding(bat);
+
+                    }
+
+                    break;
+
             }
         }
 
@@ -163,7 +185,7 @@ public class BallooniePools {
 
                 }
 
-                world.playSound(null,pos, BallooniesSounds.LOBOTOMY, SoundCategory.HOSTILE);
+                world.playSound(null, pos, BallooniesSounds.LOBOTOMY, SoundCategory.HOSTILE);
 
             } else {
 

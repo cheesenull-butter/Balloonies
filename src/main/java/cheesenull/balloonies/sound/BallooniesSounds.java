@@ -8,7 +8,7 @@ import net.minecraft.util.Identifier;
 
 public class BallooniesSounds {
 
-    public static final SoundEvent BALOONIE_POP = registerSoundEvent("entity.balloonie.balloonie_pop");
+    public static final SoundEvent POP = registerSoundEvent("entity.balloonie.pop");
     public static final SoundEvent LOBOTOMY = registerSoundEvent("entity.balloonie.lobotomy");
 
     private static SoundEvent registerSoundEvent(String name) {

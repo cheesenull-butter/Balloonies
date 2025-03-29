@@ -4,12 +4,12 @@
     "sounds": [
       {
         "name": "balloonies:pop1",
-        "volume": 10,
+        "volume": 20,
         "pitch": 1.75
       },
       {
         "name": "balloonies:pop2",
-        "volume": 10,
+        "volume": 20,
         "pitch": 2.0
       }
     ]

@@ -3,5 +3,8 @@
 
   "effect.balloonies.distortion": "Distortion",
 
-  "entity.balloonies.balloonie": "Balloonie"
+  "entity.balloonies.balloonie": "Balloonie",
+
+  "subtitles.entity.balloonie.lobotomy": "Lobotomy ringing",
+  "subtitles.entity.balloonie.pop": "Balloonie pop"
 }

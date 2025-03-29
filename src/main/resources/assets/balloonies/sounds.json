@@ -1,18 +1,16 @@
 {
-  "entity.balloonie.balloonie_pop": {
-    "subtitle": "sounds.balloonies.balloonie_pop",
+  "entity.balloonie.pop": {
+    "subtitle": "sounds.balloonies.pop",
     "sounds": [
       {
-        "name": "balloonies:balloonie_pop0"
+        "name": "balloonies:pop1",
+        "volume": 10,
+        "pitch": 1.75
       },
       {
-        "name": "balloonies:balloonie_pop1"
-      },
-      {
-        "name": "balloonies:balloonie_pop2"
-      },
-      {
-        "name": "balloonies:balloonie_pop3"
+        "name": "balloonies:pop2",
+        "volume": 10,
+        "pitch": 2.0
       }
     ]
   },

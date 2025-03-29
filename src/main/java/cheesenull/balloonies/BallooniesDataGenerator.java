@@ -11,6 +11,7 @@ public class BallooniesDataGenerator implements DataGeneratorEntrypoint {
 
 		FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
 
+
 		pack.addProvider(BallooniesLootTableProvider::new);
 		pack.addProvider(BallooniesModelProvider::new);
 

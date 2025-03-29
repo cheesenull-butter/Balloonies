@@ -18,6 +18,7 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class BallooniePools {
@@ -106,35 +107,29 @@ public class BallooniePools {
 
                 case 5:
 
-                    Item[] possibleItems = {
-                            Items.EMERALD,
-                            Items.AMETHYST_SHARD,
-                            Items.IRON_INGOT,
-                            Items.IRON_NUGGET,
-                            Items.GOLD_INGOT,
-                            Items.GOLD_NUGGET,
-                            Items.COPPER_INGOT,
-                            Items.BREAD,
-                            Items.CARROT,
-                            Items.POTATO,
-                            Items.BAKED_POTATO,
-                            Items.LEATHER,
-                            Items.STICK,
-                            Items.PAPER,
-                            Items.SLIME_BALL,
-                            Items.LEAD,
-                            Items.SADDLE,
-                            Items.NAME_TAG
-                    };
-
-                    Random random = new Random();
-                    Item ranItem = possibleItems[random.nextInt(possibleItems.length)];
-
+                    BalloonieItemPools balItemPools = new BalloonieItemPools();
+                    Item ranItem = balItemPools.itemPools[ran.nextInt(balItemPools.itemPools.length)];
                     ItemStack itemStack = new ItemStack(ranItem);
 
-                    for (int i = ran.nextInt(0, 3); i < 3; i++) {
+                    if (Arrays.asList(balItemPools.singlePools).contains(ranItem)) {
+
                         world.spawnEntity(new ItemEntity(world,
                                 pos.getX(), pos.getY(), pos.getZ(), itemStack));
+
+                    } else if (Arrays.asList(balItemPools.sextuplePools).contains(ranItem)) {
+
+                        for (int i = ran.nextInt(0, 6); i < 6; i++) {
+                            world.spawnEntity(new ItemEntity(world,
+                                    pos.getX(), pos.getY(), pos.getZ(), itemStack));
+                        }
+
+                    } else {
+
+                        for (int i = ran.nextInt(0, 3); i < 3; i++) {
+                            world.spawnEntity(new ItemEntity(world,
+                                    pos.getX(), pos.getY(), pos.getZ(), itemStack));
+                        }
+
                     }
 
                     break;

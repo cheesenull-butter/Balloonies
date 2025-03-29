@@ -21,7 +21,7 @@
     "sounds": [
       {
         "name": "balloonies:lobotomy",
-        "volume": 0.5
+        "volume": 0.25
       }
     ]
   }

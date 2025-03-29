@@ -9,13 +9,13 @@ import net.minecraft.entity.FallingBlockEntity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LightningEntity;
 import net.minecraft.entity.mob.CreeperEntity;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.FireworkRocketEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -29,34 +29,34 @@ public class BallooniePools {
 
     public void ballooniePool(World world, BlockPos pos) {
 
-        int pool = ran.nextInt(0, 3);
+        int pool = ran.nextInt(5, 6);
 
-        switch (pool) {
+        if (!world.isClient()) {
 
-            case 0 :
+            switch (pool) {
 
-                for (int x = 0; x < 2; x++) {
-                    for (int y = 0; y < 2; y++) {
-                        for (int z = 0; z < 2; z++) {
+                case 0 :
 
-                            FallingBlockEntity blockEntity =
-                                    FallingBlockEntity.spawnFromBlock(world, pos.add(x, y, z),
-                                            Blocks.BOOKSHELF.getDefaultState());
-                            ItemStack itemStack = new ItemStack(Items.BOOK);
+                    for (int x = 0; x < 2; x++) {
+                        for (int y = 0; y < 2; y++) {
+                            for (int z = 0; z < 2; z++) {
 
-                            world.spawnEntity(blockEntity);
-                            world.spawnEntity(new ItemEntity(world,
-                                    pos.getX(), pos.getY(), pos.getZ(), itemStack));
+                                FallingBlockEntity blockEntity =
+                                        FallingBlockEntity.spawnFromBlock(world, pos.add(x, y, z),
+                                                Blocks.BOOKSHELF.getDefaultState());
+                                ItemStack itemStack = new ItemStack(Items.BOOK);
 
+                                world.spawnEntity(blockEntity);
+                                world.spawnEntity(new ItemEntity(world,
+                                        pos.getX(), pos.getY(), pos.getZ(), itemStack));
+
+                            }
                         }
                     }
-                }
 
-                break;
+                    break;
 
-            case 1:
-
-                if (!world.isClient()) {
+                case 1:
 
                     for (int i = 0; i < 5; i++) {
 
@@ -71,16 +71,13 @@ public class BallooniePools {
                         double velocityY = world.random.nextDouble() * 0.5 + 0.5;
                         double velocityZ = (world.random.nextDouble() - 0.5) * 2;
                         creeper.setVelocity(velocityX, velocityY, velocityZ);
-
                     }
 
-                }
 
-                break;
 
-            case 2:
+                    break;
 
-                if (!world.isClient()) {
+                case 2:
 
                     if (world instanceof ServerWorld serverWorld) {
                         serverWorld.setWeather(0, 6000, true, true);
@@ -89,32 +86,79 @@ public class BallooniePools {
                     LightningEntity lightning = new LightningEntity(EntityType.LIGHTNING_BOLT, world);
                     world.spawnEntity(lightning);
 
+                    break;
 
-                }
+                case 3:
 
-                break;
+                    ItemStack diamond = new ItemStack(Items.DIAMOND);
+                    world.spawnEntity(new ItemEntity(world,
+                            pos.getX(), pos.getY(), pos.getZ(), diamond));
 
+                    break;
+
+                case 4:
+
+                    FireworkRocketEntity fireworkRocket =
+                            new FireworkRocketEntity(world, pos.getX(), pos.getY(), pos.getZ(), ItemStack.EMPTY);
+                    world.spawnEntity(fireworkRocket);
+
+                    break;
+
+                case 5:
+
+                    Item[] possibleItems = {
+                            Items.EMERALD,
+                            Items.AMETHYST_SHARD,
+                            Items.IRON_INGOT,
+                            Items.IRON_NUGGET,
+                            Items.GOLD_INGOT,
+                            Items.GOLD_NUGGET,
+                            Items.COPPER_INGOT,
+                            Items.BREAD,
+                            Items.CARROT,
+                            Items.POTATO,
+                            Items.BAKED_POTATO,
+                            Items.LEATHER,
+                            Items.STICK,
+                            Items.PAPER,
+                            Items.SLIME_BALL,
+                            Items.LEAD,
+                            Items.SADDLE,
+                            Items.NAME_TAG
+                    };
+
+                    Random random = new Random();
+                    Item ranItem = possibleItems[random.nextInt(possibleItems.length)];
+
+                    ItemStack itemStack = new ItemStack(ranItem);
+
+                    for (int i = ran.nextInt(0, 3); i < 3; i++) {
+                        world.spawnEntity(new ItemEntity(world,
+                                pos.getX(), pos.getY(), pos.getZ(), itemStack));
+                    }
+
+                    break;
+
+            }
         }
 
     }
 
-    public void whiteBallooniePool(World world, BlockPos pos, PlayerEntity player) {
+    public void whiteBallooniePool(World world, BlockPos pos) {
 
         int pool = ran.nextInt(0, 10);
 
-        if (pool < 8) {
+        if (!world.isClient()) {
 
-            for (int i = 0; i < 5; i++) {
+            if (pool < 8) {
 
-                if (!world.isClient()) {
+                for (int i = 0; i < 5; i++) {
 
                     BallooningEntity ballooning =
                             new BallooningEntity(BallooniesEntities.BALLOONING, world);
                     ballooning.refreshPositionAndAngles(
                             pos.getX(), pos.getY(), pos.getZ(),
                             0, 0);
-
-                    world.playSound(player, pos, BallooniesSounds.LOBOTOMY, SoundCategory.HOSTILE);
                     world.spawnEntity(ballooning);
 
                     double velocityX = (world.random.nextDouble() - 0.5) * 2;
@@ -124,12 +168,9 @@ public class BallooniePools {
 
                 }
 
-            }
+                world.playSound(null,pos, BallooniesSounds.LOBOTOMY, SoundCategory.HOSTILE);
 
-
-        } else {
-
-            if (!world.isClient()) {
+            } else {
 
                 ItemStack itemStack = new ItemStack(BallooniesBlocks.BLUE_ROSE.asItem());
                 world.spawnEntity(new ItemEntity(world,

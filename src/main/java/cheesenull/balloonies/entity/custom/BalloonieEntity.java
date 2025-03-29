@@ -53,15 +53,10 @@ public class BalloonieEntity extends FlyingEntity {
     public boolean damage(DamageSource source, float amount) {
 
         BallooniePools balPools = new BallooniePools();
-        PlayerEntity player = null;
-
-        if (source.getAttacker() instanceof PlayerEntity) {
-            player = (PlayerEntity) source.getAttacker();
-        }
 
         if (getTypeVariant() == 4) {
 
-            balPools.whiteBallooniePool(this.getWorld(), this.getBlockPos(), player);
+            balPools.whiteBallooniePool(this.getWorld(), this.getBlockPos());
             discard();
 
         } else {

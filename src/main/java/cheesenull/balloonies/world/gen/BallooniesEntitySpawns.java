@@ -19,7 +19,7 @@ public class BallooniesEntitySpawns {
                         BiomeKeys.SUNFLOWER_PLAINS,
                         BiomeKeys.SNOWY_PLAINS,
                         BiomeKeys.MEADOW),
-                SpawnGroup.AMBIENT, BallooniesEntities.BALLOONIE, 5, 1, 1);
+                SpawnGroup.AMBIENT, BallooniesEntities.BALLOONIE, 1, 0, 1);
 
         SpawnRestriction.register(BallooniesEntities.BALLOONIE, SpawnLocationTypes.UNRESTRICTED,
                 Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, FlyingEntity::canMobSpawn);

@@ -33,7 +33,7 @@ public class BallooniePools {
 
     public void ballooniePool(World world, BlockPos pos) {
 
-        int pool = ran.nextInt(6, 7);
+        int pool = ran.nextInt(0, 7);
 
         world.playSound(null, pos, BallooniesSounds.POP, SoundCategory.NEUTRAL);
 
@@ -138,7 +138,7 @@ public class BallooniePools {
 
                 case 6:
 
-                    for (int i = 0; i < 5; i++) {
+                    for (int i = 0; i < 3; i++) {
 
                         BatEntity bat = new BatEntity(EntityType.BAT, world);
                         SkeletonEntity skeleton = new SkeletonEntity(EntityType.SKELETON, world);

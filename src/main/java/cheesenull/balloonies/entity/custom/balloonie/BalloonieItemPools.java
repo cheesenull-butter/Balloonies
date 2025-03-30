@@ -1,4 +1,4 @@
-package cheesenull.balloonies.entity.custom;
+package cheesenull.balloonies.entity.custom.balloonie;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;

@@ -1,6 +1,5 @@
-package cheesenull.balloonies.entity.custom;
+package cheesenull.balloonies.entity.custom.balloonie;
 
-import cheesenull.balloonies.sound.BallooniesSounds;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.control.MoveControl;
 import net.minecraft.entity.ai.goal.Goal;

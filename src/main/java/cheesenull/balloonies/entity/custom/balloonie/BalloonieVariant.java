@@ -1,4 +1,4 @@
-package cheesenull.balloonies.entity.custom;
+package cheesenull.balloonies.entity.custom.balloonie;
 
 import java.util.Arrays;
 import java.util.Comparator;

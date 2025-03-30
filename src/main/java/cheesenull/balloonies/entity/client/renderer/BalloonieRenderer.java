@@ -2,8 +2,8 @@ package cheesenull.balloonies.entity.client.renderer;
 
 import cheesenull.balloonies.Balloonies;
 import cheesenull.balloonies.entity.client.BalloonieModel;
-import cheesenull.balloonies.entity.custom.BalloonieEntity;
-import cheesenull.balloonies.entity.custom.BalloonieVariant;
+import cheesenull.balloonies.entity.custom.balloonie.BalloonieEntity;
+import cheesenull.balloonies.entity.custom.balloonie.BalloonieVariant;
 import com.google.common.collect.Maps;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

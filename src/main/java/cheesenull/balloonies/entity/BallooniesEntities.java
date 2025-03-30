@@ -1,7 +1,7 @@
 package cheesenull.balloonies.entity;
 
 import cheesenull.balloonies.Balloonies;
-import cheesenull.balloonies.entity.custom.BalloonieEntity;
+import cheesenull.balloonies.entity.custom.balloonie.BalloonieEntity;
 import cheesenull.balloonies.entity.custom.BallooningEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;

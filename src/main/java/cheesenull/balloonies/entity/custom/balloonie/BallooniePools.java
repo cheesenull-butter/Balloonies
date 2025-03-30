@@ -1,7 +1,8 @@
-package cheesenull.balloonies.entity.custom;
+package cheesenull.balloonies.entity.custom.balloonie;
 
 import cheesenull.balloonies.block.BallooniesBlocks;
 import cheesenull.balloonies.entity.BallooniesEntities;
+import cheesenull.balloonies.entity.custom.BallooningEntity;
 import cheesenull.balloonies.sound.BallooniesSounds;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;

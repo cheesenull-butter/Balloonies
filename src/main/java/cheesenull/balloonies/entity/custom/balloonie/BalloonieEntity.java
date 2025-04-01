@@ -12,6 +12,11 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.FlyingEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.particle.ParticleEffect;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Util;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
@@ -19,6 +24,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumSet;
+import java.util.Random;
 
 public class BalloonieEntity extends FlyingEntity {
 
@@ -44,7 +50,28 @@ public class BalloonieEntity extends FlyingEntity {
     public void tick() {
 
         super.tick();
+
         this.setYaw(0.0F);
+
+        long time = getWorld().getTimeOfDay() % 24000;
+
+        if (this.getTypeVariant() == 4) {
+
+            if (time <= 16000 || time >= 20000) {
+
+                Random random = new Random();
+                int newVar = random.nextInt(4);
+
+                getWorld().addParticle(ParticleTypes.EXPLOSION_EMITTER,
+                        getX(), getY(), getZ(), 0.0F, 0.0F, 0.0F);
+
+                dataTracker.set(DATA_ID_TYPE_VARIANT, newVar & 255); 
+
+            }
+
+        }
+
+
 
     }
 
@@ -53,15 +80,19 @@ public class BalloonieEntity extends FlyingEntity {
 
         BallooniePools balPools = new BallooniePools();
 
-        if (getTypeVariant() == 4) {
+        if (!getWorld().isClient()) {
 
-            balPools.whiteBallooniePool(this.getWorld(), this.getBlockPos());
-            discard();
+            if (getTypeVariant() == 4) {
 
-        } else {
+                balPools.whiteBallooniePool(this.getWorld(), this.getBlockPos());
+                discard();
 
-            balPools.ballooniePool(this.getWorld(), this.getBlockPos());
-            discard();
+            } else {
+
+                balPools.ballooniePool(this.getWorld(), this.getBlockPos());
+                discard();
+
+            }
 
         }
 
@@ -77,15 +108,15 @@ public class BalloonieEntity extends FlyingEntity {
 
     }
 
-    public BalloonieVariant getVariant() {
-        return BalloonieVariant.byId(this.getTypeVariant() & 255);
+    public BalloonieVariants getVariant() {
+        return BalloonieVariants.byId(this.getTypeVariant() & 255);
     }
 
     private int getTypeVariant() {
         return this.dataTracker.get(DATA_ID_TYPE_VARIANT);
     }
 
-    private void setVariant(BalloonieVariant variant) {
+    private void setVariant(BalloonieVariants variant) {
         this.dataTracker.set(DATA_ID_TYPE_VARIANT, variant.getId() & 255);
     }
 
@@ -109,7 +140,7 @@ public class BalloonieEntity extends FlyingEntity {
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty,
                                  SpawnReason spawnReason, @Nullable EntityData entityData) {
 
-        BalloonieVariant variant = Util.getRandom(BalloonieVariant.values(), this.random);
+        BalloonieVariants variant = Util.getRandom(BalloonieVariants.values(), this.random);
         setVariant(variant);
 
         return super.initialize(world, difficulty, spawnReason, entityData);
@@ -178,7 +209,7 @@ public class BalloonieEntity extends FlyingEntity {
 
         public boolean canStart() {
 
-            return balloonie.getPos().getY() < 80;
+            return balloonie.getBlockPos().getY() < 80;
         }
 
         public boolean shouldContinue() {

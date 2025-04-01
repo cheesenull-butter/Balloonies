@@ -12,6 +12,7 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraft.world.explosion.Explosion;
 
 import java.util.EnumSet;
 
@@ -33,8 +34,13 @@ public class BallooningEntity extends FlyingEntity {
 
         super.onPlayerCollision(player);
 
-        discard();
-//        int i = 0 /0;
+        if (!getWorld().isClient()) {
+
+            getWorld().createExplosion(this, getBlockPos().getX(), getBlockPos().getY(), getBlockPos().getZ(),
+                    2.0F, World.ExplosionSourceType.MOB);
+            discard();
+
+        }
 
     }
 

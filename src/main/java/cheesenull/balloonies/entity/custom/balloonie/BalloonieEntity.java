@@ -12,11 +12,6 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.FlyingEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.particle.ParticleEffect;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Util;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
@@ -61,9 +56,6 @@ public class BalloonieEntity extends FlyingEntity {
 
                 Random random = new Random();
                 int newVar = random.nextInt(4);
-
-                getWorld().addParticle(ParticleTypes.EXPLOSION_EMITTER,
-                        getX(), getY(), getZ(), 0.0F, 0.0F, 0.0F);
 
                 dataTracker.set(DATA_ID_TYPE_VARIANT, newVar & 255); 
 

@@ -1,21 +1,19 @@
 {
   "entity.balloonie.pop": {
-    "subtitle": "sounds.balloonies.pop",
+    "subtitle": "subtitles.entity.balloonies.balloonie.pop",
     "sounds": [
       {
         "name": "balloonies:pop1",
-        "volume": 20,
-        "pitch": 1.75
+        "volume": 20
       },
       {
         "name": "balloonies:pop2",
-        "volume": 20,
-        "pitch": 2.0
+        "volume": 20
       }
     ]
   },
   "entity.balloonie.lobotomy": {
-    "subtitle": "sounds.balloonies.lobotomy",
+    "subtitle": "subtitles.entity.balloonies.balloonie.lobotomy",
     "sounds": [
       {
         "name": "balloonies:lobotomy",

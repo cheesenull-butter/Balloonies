@@ -12,7 +12,9 @@ import net.minecraft.util.Identifier;
 
 public class BallooniesItems {
 
-    public static final Item QUIVER = registerItem("quiver", new QuiverItem(new Item.Settings()));
+    public static final Item QUIVER = registerItem("quiver",
+            new QuiverItem(new Item.Settings()
+                    .maxDamage(77)));
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, Identifier.of(Balloonies.MOD_ID, name), item);

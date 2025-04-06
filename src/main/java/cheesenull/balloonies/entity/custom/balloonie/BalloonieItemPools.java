@@ -11,6 +11,7 @@ public class BalloonieItemPools {
     Item[] itemPools = {
 
             Items.GOLDEN_APPLE,
+            Items.DIAMOND,
             Items.SPIDER_EYE,
             Items.POISONOUS_POTATO,
             Items.APPLE,

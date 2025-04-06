@@ -17,6 +17,7 @@ import net.minecraft.entity.projectile.FireworkRocketEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.Hand;
@@ -130,6 +131,22 @@ public class BallooniePools {
 
                 skeleton.setStackInHand(Hand.MAIN_HAND, new ItemStack(Items.BOW));
                 skeleton.startRiding(bat);
+
+            }
+
+        } else {
+
+            for (int i = 0; i < 5; i++) {
+
+                double d = pos.getX() + 2.0;
+                double e = pos.getY() + 2.0;
+                double f = pos.getZ() + 2.0;
+
+                double offsetX = (world.getRandom().nextDouble() - 0.5) * 2;
+                double offsetY = (world.getRandom().nextDouble() * 0.5) * 4;
+                double offsetZ = (world.getRandom().nextDouble() - 0.5) * 2;
+
+                world.addParticle(ParticleTypes.SMOKE, d + offsetX, e + offsetY, f + offsetZ, 0.0, 0.0, 0.0);
 
             }
 

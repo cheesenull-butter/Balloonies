@@ -1,11 +1,14 @@
 {
   "block.balloonies.blue_rose": "Blue Rose",
+  "block.balloonies.clover": "Clover",
 
   "effect.balloonies.distortion": "Distortion",
 
   "entity.balloonies.balloonie": "Balloonie",
 
   "item.balloonies.quiver": "Quiver",
+
+  "itemGroup.balloonies.balloonies_group": "Balloonies",
 
   "subtitles.entity.balloonies.balloonie.lobotomy": "Lobotomy ringing",
   "subtitles.entity.balloonies.balloonie.pop": "Balloonie pop"

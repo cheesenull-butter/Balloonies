@@ -5,6 +5,7 @@ import cheesenull.balloonies.effect.BallooniesEffects;
 import cheesenull.balloonies.entity.BallooniesEntities;
 import cheesenull.balloonies.entity.custom.balloonie.BalloonieEntity;
 import cheesenull.balloonies.entity.custom.BallooningEntity;
+import cheesenull.balloonies.item.BallooniesCreativeTabs;
 import cheesenull.balloonies.item.BallooniesItems;
 import cheesenull.balloonies.particle.BallooniesParticles;
 import cheesenull.balloonies.sound.BallooniesSounds;
@@ -22,6 +23,8 @@ public class Balloonies implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+
+		BallooniesCreativeTabs.registerItemGroups();
 
 		BallooniesItems.registerItems();
 		BallooniesBlocks.registerBlocks();

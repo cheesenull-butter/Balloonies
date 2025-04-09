@@ -25,6 +25,8 @@ public class BallooniesClient implements ClientModInitializer {
 
 		BlockRenderLayerMap.INSTANCE.putBlock(BallooniesBlocks.BLUE_ROSE, RenderLayer.getCutout());
 		BlockRenderLayerMap.INSTANCE.putBlock(BallooniesBlocks.POTTED_BLUE_ROSE, RenderLayer.getCutout());
+		BlockRenderLayerMap.INSTANCE.putBlock(BallooniesBlocks.CLOVER, RenderLayer.getCutout());
+		BlockRenderLayerMap.INSTANCE.putBlock(BallooniesBlocks.POTTED_CLOVER, RenderLayer.getCutout());
 
 		EntityModelLayerRegistry.registerModelLayer(BalloonieModel.BALLOONIE,
 				BalloonieModel::getTexturedModelData);

@@ -19,6 +19,12 @@ public class BallooniesBlocks {
     public static final Block POTTED_BLUE_ROSE = Registry.register(Registries.BLOCK,
             Identifier.of(Balloonies.MOD_ID, "potted_blue_rose"),
             new FlowerPotBlock(BLUE_ROSE, AbstractBlock.Settings.copy(Blocks.POTTED_POPPY).nonOpaque()));
+    public static final Block CLOVER = registerBlock("clover",
+            new FlowerBlock(StatusEffects.LUCK, 5.0F,
+                    AbstractBlock.Settings.copy(Blocks.POPPY)));
+    public static final Block POTTED_CLOVER = Registry.register(Registries.BLOCK,
+            Identifier.of(Balloonies.MOD_ID, "potted_clover"),
+            new FlowerPotBlock(BLUE_ROSE, AbstractBlock.Settings.copy(Blocks.POTTED_POPPY).nonOpaque()));
 
     private static Block registerBlock(String name, Block block) {
         registerBlockItem(name, block);
@@ -36,6 +42,7 @@ public class BallooniesBlocks {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.NATURAL).register(entries -> {
 
             entries.addAfter(Blocks.WITHER_ROSE, BLUE_ROSE);
+            entries.addAfter(Blocks.DEAD_BUSH, CLOVER);
 
         });
     }

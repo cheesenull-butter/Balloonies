@@ -1,5 +1,7 @@
 package cheesenull.balloonies.entity.custom.balloonie;
 
+import cheesenull.balloonies.particle.BallooniesParticles;
+import cheesenull.balloonies.particle.custom.ConfettiParticle;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.control.MoveControl;
 import net.minecraft.entity.ai.goal.Goal;
@@ -12,6 +14,9 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.FlyingEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.particle.ParticleEffect;
+import net.minecraft.particle.ParticleType;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.Util;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
@@ -72,14 +77,58 @@ public class BalloonieEntity extends FlyingEntity {
 
         BallooniePools balPools = new BallooniePools();
 
-        if (!getWorld().isClient()) {
+        if (getTypeVariant() == 4) {
 
-            if (getTypeVariant() == 4) {
+            for (int i = 0; i < 15; i++) {
+
+                getWorld().addParticle(
+                        BallooniesParticles.CONFETTI_BLACK,
+                        getX(), getY(), getZ(),
+                        (random.nextDouble() - 0.5) * 0.1,
+                        random.nextDouble() * 0.2,
+                        (random.nextDouble() - 0.5) * 0.1);
+
+            }
+
+            if (!getWorld().isClient()) {
 
                 balPools.whiteBallooniePool(this.getWorld(), this.getBlockPos());
                 discard();
 
-            } else {
+            }
+
+        } else {
+
+            for (int i = 0; i < 15; i++) {
+
+                int parNum = random.nextInt(3);
+                ParticleEffect parType = null;
+
+                switch (parNum) {
+
+                    case 0:
+                        parType = BallooniesParticles.CONFETTI_BLUE;
+                        break;
+
+                    case 1:
+                        parType = BallooniesParticles.CONFETTI_ORANGE;
+                        break;
+
+                    case 2:
+                        parType = BallooniesParticles.CONFETTI_RED;
+
+                }
+
+                getWorld().addParticle(
+                        parType,
+                        getX(), getY(), getZ(),
+                        (random.nextDouble() - 0.5) * 0.1,
+                        random.nextDouble() * 0.2,
+                        (random.nextDouble() - 0.5) * 0.1);
+
+            }
+
+            if (!getWorld().isClient()) {
 
                 balPools.ballooniePool(this.getWorld(), this.getBlockPos());
                 discard();

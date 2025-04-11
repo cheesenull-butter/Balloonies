@@ -8,7 +8,7 @@ import cheesenull.balloonies.entity.client.BallooningModel;
 import cheesenull.balloonies.entity.client.renderer.BalloonieRenderer;
 import cheesenull.balloonies.entity.client.renderer.BallooningRenderer;
 import cheesenull.balloonies.particle.BallooniesParticles;
-import cheesenull.balloonies.particle.custom.YellowConfettiParticle;
+import cheesenull.balloonies.particle.custom.ConfettiParticle;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
@@ -25,8 +25,6 @@ public class BallooniesClient implements ClientModInitializer {
 
 		BlockRenderLayerMap.INSTANCE.putBlock(BallooniesBlocks.BLUE_ROSE, RenderLayer.getCutout());
 		BlockRenderLayerMap.INSTANCE.putBlock(BallooniesBlocks.POTTED_BLUE_ROSE, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(BallooniesBlocks.CLOVER, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(BallooniesBlocks.POTTED_CLOVER, RenderLayer.getCutout());
 
 		EntityModelLayerRegistry.registerModelLayer(BalloonieModel.BALLOONIE,
 				BalloonieModel::getTexturedModelData);
@@ -35,8 +33,14 @@ public class BallooniesClient implements ClientModInitializer {
 				BallooningModel::getTexturedModelData);
 		EntityRendererRegistry.register(BallooniesEntities.BALLOONING, BallooningRenderer::new);
 
-		ParticleFactoryRegistry.getInstance().register(BallooniesParticles.LAG,
-				YellowConfettiParticle.Factory::new);
+		ParticleFactoryRegistry.getInstance().register(BallooniesParticles.CONFETTI_BLACK,
+				ConfettiParticle.Factory::new);
+		ParticleFactoryRegistry.getInstance().register(BallooniesParticles.CONFETTI_BLUE,
+				ConfettiParticle.Factory::new);
+		ParticleFactoryRegistry.getInstance().register(BallooniesParticles.CONFETTI_ORANGE,
+				ConfettiParticle.Factory::new);
+		ParticleFactoryRegistry.getInstance().register(BallooniesParticles.CONFETTI_RED,
+				ConfettiParticle.Factory::new);
 
 	}
 

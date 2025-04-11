@@ -19,8 +19,6 @@ public class BallooniesModelProvider extends FabricModelProvider {
 
         blockStateModelGenerator.registerFlowerPotPlant(BallooniesBlocks.BLUE_ROSE,
                 BallooniesBlocks.POTTED_BLUE_ROSE, BlockStateModelGenerator.TintType.NOT_TINTED);
-        blockStateModelGenerator.registerFlowerPotPlant(BallooniesBlocks.CLOVER,
-                BallooniesBlocks.POTTED_CLOVER, BlockStateModelGenerator.TintType.NOT_TINTED);
 
     }
 

@@ -18,7 +18,6 @@ public class BallooniesCreativeTabs {
                     .displayName(Text.translatable("itemGroup.balloonies.balloonies_group"))
                     .entries((displayContext, entries) -> {
                         entries.add(BallooniesBlocks.BLUE_ROSE);
-                        entries.add(BallooniesBlocks.CLOVER);
                         entries.add(BallooniesItems.QUIVER);
                     }).build());
 

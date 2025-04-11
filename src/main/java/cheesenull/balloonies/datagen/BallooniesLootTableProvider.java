@@ -18,8 +18,6 @@ public class BallooniesLootTableProvider extends FabricBlockLootTableProvider {
 
         addDrop(BallooniesBlocks.BLUE_ROSE);
         addPottedPlantDrops(BallooniesBlocks.POTTED_BLUE_ROSE);
-        addDrop(BallooniesBlocks.CLOVER);
-        addPottedPlantDrops(BallooniesBlocks.POTTED_CLOVER);
 
     }
 

@@ -1,7 +1,6 @@
 package cheesenull.balloonies.entity.custom.balloonie;
 
 import cheesenull.balloonies.particle.BallooniesParticles;
-import cheesenull.balloonies.particle.custom.ConfettiParticle;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.control.MoveControl;
 import net.minecraft.entity.ai.goal.Goal;
@@ -15,16 +14,14 @@ import net.minecraft.entity.mob.FlyingEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleEffect;
-import net.minecraft.particle.ParticleType;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.Util;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumSet;
-import java.util.Random;
 
 public class BalloonieEntity extends FlyingEntity {
 
@@ -37,7 +34,7 @@ public class BalloonieEntity extends FlyingEntity {
 
     public static DefaultAttributeContainer.Builder createBalloonieAttributes() {
         return MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 100.0F);
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 1000.0F);
     }
 
     @Override
@@ -54,12 +51,12 @@ public class BalloonieEntity extends FlyingEntity {
         this.setYaw(0.0F);
 
         long time = getWorld().getTimeOfDay() % 24000;
+        BallooniePools balPools = new BallooniePools();
 
         if (this.getTypeVariant() == 4) {
 
             if (time <= 16000 || time >= 20000) {
 
-                Random random = new Random();
                 int newVar = random.nextInt(4);
 
                 dataTracker.set(DATA_ID_TYPE_VARIANT, newVar & 255); 
@@ -68,14 +65,30 @@ public class BalloonieEntity extends FlyingEntity {
 
         }
 
+        if (this.getHealth() < 1000.0F) {
 
+            if (!getWorld().isClient()) {
+
+                if (getTypeVariant() == 4) {
+
+                    balPools.whiteBallooniePool(getWorld(), getBlockPos());
+
+                } else {
+
+                    balPools.ballooniePool(getWorld(), getBlockPos());
+
+                }
+
+                discard();
+
+            }
+
+        }
 
     }
 
     @Override
-    public boolean damage(DamageSource source, float amount) {
-
-        BallooniePools balPools = new BallooniePools();
+    public void onDamaged(DamageSource damageSource) {
 
         if (getTypeVariant() == 4) {
 
@@ -83,61 +96,53 @@ public class BalloonieEntity extends FlyingEntity {
 
                 getWorld().addParticle(
                         BallooniesParticles.CONFETTI_BLACK,
-                        getX(), getY(), getZ(),
+                        getX(), getY() + 1, getZ(),
                         (random.nextDouble() - 0.5) * 0.1,
                         random.nextDouble() * 0.2,
                         (random.nextDouble() - 0.5) * 0.1);
-
-            }
-
-            if (!getWorld().isClient()) {
-
-                balPools.whiteBallooniePool(this.getWorld(), this.getBlockPos());
-                discard();
 
             }
 
         } else {
 
-            for (int i = 0; i < 15; i++) {
-
-                int parNum = random.nextInt(3);
-                ParticleEffect parType = null;
-
-                switch (parNum) {
-
-                    case 0:
-                        parType = BallooniesParticles.CONFETTI_BLUE;
-                        break;
-
-                    case 1:
-                        parType = BallooniesParticles.CONFETTI_ORANGE;
-                        break;
-
-                    case 2:
-                        parType = BallooniesParticles.CONFETTI_RED;
-
-                }
-
-                getWorld().addParticle(
-                        parType,
-                        getX(), getY(), getZ(),
-                        (random.nextDouble() - 0.5) * 0.1,
-                        random.nextDouble() * 0.2,
-                        (random.nextDouble() - 0.5) * 0.1);
-
-            }
-
-            if (!getWorld().isClient()) {
-
-                balPools.ballooniePool(this.getWorld(), this.getBlockPos());
-                discard();
-
-            }
+            spawnColorConfetti(getWorld(), getBlockPos());
 
         }
 
-        return true;
+        super.onDamaged(damageSource);
+
+    }
+
+    public void spawnColorConfetti(World world, BlockPos pos) {
+
+        for (int i = 0; i < 15; i++) {
+
+            int parNum = random.nextInt(3);
+            ParticleEffect parType = null;
+
+            switch (parNum) {
+
+                case 0:
+                    parType = BallooniesParticles.CONFETTI_BLUE;
+                    break;
+
+                case 1:
+                    parType = BallooniesParticles.CONFETTI_ORANGE;
+                    break;
+
+                case 2:
+                    parType = BallooniesParticles.CONFETTI_RED;
+
+            }
+
+            world.addParticle(
+                    parType,
+                    pos.getX(), pos.getY() + 1, pos.getZ(),
+                    (random.nextDouble() - 0.5) * 0.1,
+                    random.nextDouble() * 0.2,
+                    (random.nextDouble() - 0.5) * 0.1);
+
+        }
 
     }
 

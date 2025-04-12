@@ -4,8 +4,11 @@ import cheesenull.balloonies.block.BallooniesBlocks;
 import cheesenull.balloonies.entity.BallooniesEntities;
 import cheesenull.balloonies.entity.custom.BallooningEntity;
 import cheesenull.balloonies.item.BallooniesItems;
+import cheesenull.balloonies.particle.BallooniesParticles;
 import cheesenull.balloonies.sound.BallooniesSounds;
+import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.FarmlandBlock;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.FallingBlockEntity;
 import net.minecraft.entity.ItemEntity;
@@ -17,7 +20,6 @@ import net.minecraft.entity.projectile.FireworkRocketEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.Hand;
@@ -31,16 +33,15 @@ public class BallooniePools {
 
     Random ran = new Random();
 
-    public BallooniePools() {
-    }
+    public BallooniePools() {}
 
     public void ballooniePool(World world, BlockPos pos) {
 
-        int pool = ran.nextInt(1, 101);
+        int pool = ran.nextInt(86, 100);
 
         world.playSound(null, pos, BallooniesSounds.POP, SoundCategory.NEUTRAL);
 
-        if (pool <= 25) {
+        if (pool < 25) {
 
             BalloonieItemPools balItemPools = new BalloonieItemPools();
             Item ranItem = balItemPools.itemPools[ran.nextInt(balItemPools.itemPools.length)];
@@ -67,7 +68,7 @@ public class BallooniePools {
 
             }
 
-        } else if (pool > 25 && pool <= 40) {
+        } else if (pool < 40) {
 
             for (int x = 0; x < 2; x++) {
                 for (int y = 0; y < 2; y++) {
@@ -86,7 +87,7 @@ public class BallooniePools {
                 }
             }
 
-        } else if (pool > 40 && pool <= 60) {
+        } else if (pool < 60) {
 
             for (int i = 0; i < 5; i++) {
 
@@ -101,7 +102,7 @@ public class BallooniePools {
 
             }
 
-        } else if (pool > 60 && pool <= 65) {
+        } else if (pool < 65) {
 
             if (world instanceof ServerWorld serverWorld) {
                 serverWorld.setWeather(0, 6000, true, true);
@@ -110,13 +111,13 @@ public class BallooniePools {
             LightningEntity lightning = new LightningEntity(EntityType.LIGHTNING_BOLT, world);
             world.spawnEntity(lightning);
 
-        } else if (pool > 65 && pool <= 80) {
+        } else if (pool < 80) {
 
             FireworkRocketEntity fireworkRocket =
                     new FireworkRocketEntity(world, pos.getX(), pos.getY(), pos.getZ(), ItemStack.EMPTY);
             world.spawnEntity(fireworkRocket);
 
-        } else if (pool > 80 && pool <= 85) {
+        } else if (pool < 85) {
 
             for (int i = 0; i < 3; i++) {
 
@@ -136,19 +137,17 @@ public class BallooniePools {
 
         } else {
 
-            for (int i = 0; i < 5; i++) {
+            BalloonieCropPools cropPools = new BalloonieCropPools();
+            Block ranBlock = cropPools.cropPools[ran.nextInt(cropPools.cropPools.length)];
 
-                double d = pos.getX() + 2.0;
-                double e = pos.getY() + 2.0;
-                double f = pos.getZ() + 2.0;
+            FallingBlockEntity farmlandEntity =
+                    FallingBlockEntity.spawnFromBlock(world, pos,
+                            Blocks.FARMLAND.getDefaultState().with(FarmlandBlock.MOISTURE, 7));
+            FallingBlockEntity cropEntity =
+                    FallingBlockEntity.spawnFromBlock(world, pos.up(), ranBlock.getDefaultState());
 
-                double offsetX = (world.getRandom().nextDouble() - 0.5) * 2;
-                double offsetY = (world.getRandom().nextDouble() * 0.5) * 4;
-                double offsetZ = (world.getRandom().nextDouble() - 0.5) * 2;
-
-                world.addParticle(ParticleTypes.SMOKE, d + offsetX, e + offsetY, f + offsetZ, 0.0, 0.0, 0.0);
-
-            }
+            world.spawnEntity(farmlandEntity);
+            world.spawnEntity(cropEntity);
 
         }
 
@@ -156,9 +155,9 @@ public class BallooniePools {
 
     public void whiteBallooniePool(World world, BlockPos pos) {
 
-        int pool = ran.nextInt(0, 10);
+        int whitePool = ran.nextInt(0, 10);
 
-        if (pool < 8) {
+        if (whitePool < 8) {
 
             for (int i = 0; i < 5; i++) {
 
@@ -201,7 +200,5 @@ public class BallooniePools {
         }
 
     }
-
-
 
 }

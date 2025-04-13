@@ -19,6 +19,7 @@ public class BallooniesCreativeTabs {
                     .entries((displayContext, entries) -> {
                         entries.add(BallooniesBlocks.BLUE_ROSE);
                         entries.add(BallooniesItems.QUIVER);
+                        entries.add(BallooniesItems.BAGUETTE);
                     }).build());
 
 

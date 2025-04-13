@@ -27,6 +27,8 @@ public class BallooniesModelProvider extends FabricModelProvider {
 
         itemModelGenerator.register(BallooniesItems.QUIVER, Models.GENERATED);
 
+        itemModelGenerator.register(BallooniesItems.BAGUETTE, Models.GENERATED);
+
     }
 
 }

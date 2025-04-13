@@ -105,44 +105,38 @@ public class BalloonieEntity extends FlyingEntity {
 
         } else {
 
-            spawnColorConfetti(getWorld(), getBlockPos());
+            for (int i = 0; i < 15; i++) {
+
+                int parNum = random.nextInt(3);
+                ParticleEffect parType = null;
+
+                switch (parNum) {
+
+                    case 0:
+                        parType = BallooniesParticles.CONFETTI_BLUE;
+                        break;
+
+                    case 1:
+                        parType = BallooniesParticles.CONFETTI_ORANGE;
+                        break;
+
+                    case 2:
+                        parType = BallooniesParticles.CONFETTI_RED;
+
+                }
+
+                getWorld().addParticle(
+                        parType,
+                        getX(), getY() + 1, getZ(),
+                        (random.nextDouble() - 0.5) * 0.1,
+                        random.nextDouble() * 0.2,
+                        (random.nextDouble() - 0.5) * 0.1);
+
+            }
 
         }
 
         super.onDamaged(damageSource);
-
-    }
-
-    public void spawnColorConfetti(World world, BlockPos pos) {
-
-        for (int i = 0; i < 15; i++) {
-
-            int parNum = random.nextInt(3);
-            ParticleEffect parType = null;
-
-            switch (parNum) {
-
-                case 0:
-                    parType = BallooniesParticles.CONFETTI_BLUE;
-                    break;
-
-                case 1:
-                    parType = BallooniesParticles.CONFETTI_ORANGE;
-                    break;
-
-                case 2:
-                    parType = BallooniesParticles.CONFETTI_RED;
-
-            }
-
-            world.addParticle(
-                    parType,
-                    pos.getX(), pos.getY() + 1, pos.getZ(),
-                    (random.nextDouble() - 0.5) * 0.1,
-                    random.nextDouble() * 0.2,
-                    (random.nextDouble() - 0.5) * 0.1);
-
-        }
 
     }
 

@@ -6,6 +6,7 @@ import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ArrowItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
@@ -41,6 +42,17 @@ public class QuiverItem extends Item {
                     }
 
                     stackToIndex.put(stack, i);
+
+                }
+
+            }
+
+            if (arrowPool.isEmpty() && player.isCreative()) {
+
+                for (int i = 0; i < 5; i++) {
+
+                    ItemStack stack = new ItemStack(Items.ARROW);
+                    arrowPool.add(stack);
 
                 }
 
@@ -86,18 +98,24 @@ public class QuiverItem extends Item {
 
             }
 
-            if (!player.isCreative()) {
+            if (arrowsToShoot > 0) {
 
-                EquipmentSlot slot = hand == Hand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
-                quiver.damage(1, player, slot);
+                if (!player.isCreative()) {
+
+                    EquipmentSlot slot = hand == Hand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
+                    quiver.damage(1, player, slot);
+
+                }
+
+                world.playSound(null, player.getBlockPos(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS);
+                player.getItemCooldownManager().set(this, 20);
 
             }
-            world.playSound(null, player.getBlockPos(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS);
-            player.getItemCooldownManager().set(this, 20);
 
         }
 
         return TypedActionResult.success(player.getStackInHand(hand), world.isClient());
+
     }
 
 }

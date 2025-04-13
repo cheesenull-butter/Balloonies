@@ -25,7 +25,7 @@ public class BallooningEntity extends FlyingEntity {
 
     public static DefaultAttributeContainer.Builder createBallooningAttributes() {
         return MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 1.0F)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 1000.0F)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 100.0F);
     }
 

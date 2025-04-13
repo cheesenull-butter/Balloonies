@@ -37,7 +37,7 @@ public class BallooniePools {
 
     public void ballooniePool(World world, BlockPos pos) {
 
-        int pool = ran.nextInt(86, 100);
+        int pool = ran.nextInt(100);
 
         world.playSound(null, pos, BallooniesSounds.POP, SoundCategory.NEUTRAL);
 
@@ -54,14 +54,14 @@ public class BallooniePools {
 
             } else if (Arrays.asList(balItemPools.sextuplePools).contains(ranItem)) {
 
-                for (int i = ran.nextInt(0, 6); i < 6; i++) {
+                for (int i = ran.nextInt(6); i < 6; i++) {
                     world.spawnEntity(new ItemEntity(world,
                             pos.getX(), pos.getY(), pos.getZ(), itemStack));
                 }
 
             } else {
 
-                for (int i = ran.nextInt(0, 3); i < 3; i++) {
+                for (int i = ran.nextInt(3); i < 3; i++) {
                     world.spawnEntity(new ItemEntity(world,
                             pos.getX(), pos.getY(), pos.getZ(), itemStack));
                 }
@@ -155,7 +155,7 @@ public class BallooniePools {
 
     public void whiteBallooniePool(World world, BlockPos pos) {
 
-        int whitePool = ran.nextInt(0, 10);
+        int whitePool = ran.nextInt(10);
 
         if (whitePool < 8) {
 
@@ -179,7 +179,7 @@ public class BallooniePools {
 
         } else {
 
-            int insidePool = ran.nextInt(0, 2);
+            int insidePool = ran.nextInt(2);
 
             switch (insidePool) {
 

@@ -1,7 +1,8 @@
-// 1.21.1	2025-04-11T15:56:15.5775316	Balloonies/Model Definitions
+// 1.21.1	2025-04-13T06:53:46.0204381	Balloonies/Model Definitions
 5b4f7adf1272bee864ab0674a3a314ebff548262 assets\balloonies\blockstates\blue_rose.json
 81715e63a3d5fe6e3ea63c3a8bf07e738ce8bcfb assets\balloonies\models\item\quiver.json
 4ee0691b428d19f251ae413b188b6ccdcb946b22 assets\balloonies\models\block\potted_blue_rose.json
+a675084ef96b26936b262941bdcec9dc04eed777 assets\balloonies\models\item\baguette.json
 c5a3bc38483684f80a4ad54805de727674d1b67f assets\balloonies\models\item\blue_rose.json
 3b46e46ae813f3ba60b6debe310b1754fb150be4 assets\balloonies\blockstates\potted_blue_rose.json
 a44a15e8fbcb63e7b932fa3608aac5e4f9fae89b assets\balloonies\models\block\blue_rose.json

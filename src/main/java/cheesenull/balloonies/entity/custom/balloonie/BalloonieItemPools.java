@@ -1,5 +1,6 @@
 package cheesenull.balloonies.entity.custom.balloonie;
 
+import cheesenull.balloonies.item.BallooniesItems;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 
@@ -10,6 +11,7 @@ public class BalloonieItemPools {
 
     Item[] itemPools = {
 
+            BallooniesItems.BAGUETTE,
             Items.GOLDEN_APPLE,
             Items.DIAMOND,
             Items.SPIDER_EYE,
@@ -55,6 +57,7 @@ public class BalloonieItemPools {
 
     Item[] singlePools = {
 
+            BallooniesItems.BAGUETTE,
             Items.GOLDEN_APPLE,
             Items.SPIDER_EYE,
             Items.POISONOUS_POTATO,

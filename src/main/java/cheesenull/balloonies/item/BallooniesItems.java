@@ -18,7 +18,8 @@ public class BallooniesItems {
             new BaguetteItem(ToolMaterials.WOOD, new Item.Settings()
                     .attributeModifiers(SwordItem
                             .createAttributeModifiers(ToolMaterials.WOOD,
-                                    2, -2.4F))));
+                                    2, -2.4F))
+                    .food(BallooniesFoodComponents.BAGUETTE)));
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, Identifier.of(Balloonies.MOD_ID, name), item);

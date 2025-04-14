@@ -25,9 +25,8 @@ public class BallooniesModelProvider extends FabricModelProvider {
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
 
-        itemModelGenerator.register(BallooniesItems.QUIVER, Models.GENERATED);
-
-        itemModelGenerator.register(BallooniesItems.BAGUETTE, Models.GENERATED);
+        itemModelGenerator.register(BallooniesItems.QUIVER, Models.HANDHELD);
+        itemModelGenerator.register(BallooniesItems.BAGUETTE, Models.HANDHELD);
 
     }
 

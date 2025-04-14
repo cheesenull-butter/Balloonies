@@ -17,9 +17,12 @@ public class BallooniesCreativeTabs {
             FabricItemGroup.builder().icon(() -> new ItemStack(BallooniesBlocks.BLUE_ROSE))
                     .displayName(Text.translatable("itemGroup.balloonies.balloonies_group"))
                     .entries((displayContext, entries) -> {
+
                         entries.add(BallooniesBlocks.BLUE_ROSE);
+                        entries.add(BallooniesItems.OXIDIZED_BLADE);
                         entries.add(BallooniesItems.QUIVER);
                         entries.add(BallooniesItems.BAGUETTE);
+
                     }).build());
 
 

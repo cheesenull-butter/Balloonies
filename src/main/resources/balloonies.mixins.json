@@ -3,7 +3,9 @@
 	"package": "cheesenull.balloonies.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-		"GameRendererMixin"
+		"GameRendererMixin",
+		"ItemRendererMixin",
+		"ModelLoaderMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

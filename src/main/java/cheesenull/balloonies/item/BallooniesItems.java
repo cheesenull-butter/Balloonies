@@ -1,13 +1,17 @@
 package cheesenull.balloonies.item;
 
 import cheesenull.balloonies.Balloonies;
+import cheesenull.balloonies.entity.custom.HarpoonEntity;
 import cheesenull.balloonies.item.custom.BaguetteItem;
 import cheesenull.balloonies.item.custom.QuiverItem;
+import cheesenull.balloonies.item.custom.harpoon.HarpoonItem;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
 
 public class BallooniesItems {
 
@@ -17,6 +21,13 @@ public class BallooniesItems {
                             .createAttributeModifiers(ToolMaterials.IRON,
                                     3, -2.4F))
                     .food(BallooniesFoodComponents.BAGUETTE)));
+    public static final Item HARPOON = registerItem("harpoon",
+            new HarpoonItem(new Item.Settings()
+                    .rarity(Rarity.EPIC)
+                    .maxDamage(232)
+                    .attributeModifiers(TridentItem
+                            .createAttributeModifiers())
+                    .component(DataComponentTypes.TOOL, HarpoonItem.createToolComponent())));
     public static final Item QUIVER = registerItem("quiver",
             new QuiverItem(new Item.Settings()
                     .maxDamage(77)));
@@ -35,7 +46,9 @@ public class BallooniesItems {
         Balloonies.LOGGER.info("Registering Mod Items for " + Balloonies.MOD_ID);
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(entries -> {
-            entries.addAfter(Items.WOODEN_SWORD, OXIDIZED_BLADE);
+            entries.addBefore(Items.WOODEN_SWORD, OXIDIZED_BLADE);
+            entries.addAfter(OXIDIZED_BLADE, BAGUETTE);
+            entries.addBefore(Items.TRIDENT, HARPOON);
             entries.addAfter(Items.CROSSBOW, QUIVER);
         });
 

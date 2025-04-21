@@ -1,10 +1,9 @@
 package cheesenull.balloonies.item;
 
 import cheesenull.balloonies.Balloonies;
-import cheesenull.balloonies.entity.custom.HarpoonEntity;
 import cheesenull.balloonies.item.custom.BaguetteItem;
 import cheesenull.balloonies.item.custom.QuiverItem;
-import cheesenull.balloonies.item.custom.harpoon.HarpoonItem;
+import cheesenull.balloonies.item.custom.HarpoonItem;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.item.*;
@@ -17,6 +16,7 @@ public class BallooniesItems {
 
     public static final Item OXIDIZED_BLADE = registerItem("oxidized_blade",
             new SwordItem(ToolMaterials.IRON, new Item.Settings()
+                    .rarity(Rarity.RARE)
                     .attributeModifiers(SwordItem
                             .createAttributeModifiers(ToolMaterials.IRON,
                                     3, -2.4F))
@@ -25,11 +25,12 @@ public class BallooniesItems {
             new HarpoonItem(new Item.Settings()
                     .rarity(Rarity.EPIC)
                     .maxDamage(232)
-                    .attributeModifiers(TridentItem
+                    .attributeModifiers(HarpoonItem
                             .createAttributeModifiers())
                     .component(DataComponentTypes.TOOL, HarpoonItem.createToolComponent())));
     public static final Item QUIVER = registerItem("quiver",
             new QuiverItem(new Item.Settings()
+                    .rarity(Rarity.EPIC)
                     .maxDamage(77)));
     public static final Item BAGUETTE = registerItem("baguette",
             new BaguetteItem(ToolMaterials.WOOD, new Item.Settings()

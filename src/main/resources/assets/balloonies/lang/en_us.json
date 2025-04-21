@@ -1,6 +1,8 @@
 {
   "block.balloonies.blue_rose": "Blue Rose",
 
+  "death.attack.harpoon": "%1$s died while stuck to %2$s",
+
   "effect.balloonies.distortion": "Distortion",
 
   "entity.balloonies.balloonie": "Balloonie",

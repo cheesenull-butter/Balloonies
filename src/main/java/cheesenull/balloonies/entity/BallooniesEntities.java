@@ -17,7 +17,7 @@ public class BallooniesEntities {
     public static final EntityType<HarpoonEntity> HARPOON = Registry.register(Registries.ENTITY_TYPE,
             Identifier.of(Balloonies.MOD_ID, "harpoon"),
             EntityType.Builder.<HarpoonEntity>create(HarpoonEntity::new, SpawnGroup.MISC)
-                    .dimensions(0.5f, 1.15f).build());
+                    .dimensions(0.8F, 0.8F).build());
 
     public static final EntityType<BalloonieEntity> BALLOONIE = Registry.register(Registries.ENTITY_TYPE,
             Identifier.of(Balloonies.MOD_ID, "balloonie"),

@@ -1,5 +1,6 @@
 package cheesenull.balloonies.entity.custom;
 
+import cheesenull.balloonies.client.BallooniesDamageTypes;
 import cheesenull.balloonies.entity.BallooniesEntities;
 import cheesenull.balloonies.item.BallooniesItems;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -14,7 +15,6 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -22,12 +22,14 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 public class HarpoonEntity extends PersistentProjectileEntity {
+
+    private int stringTicks;
+    private LivingEntity stuckTo = null;
 
     private static final TrackedData<Boolean> ENCHANTED;
     private boolean dealtDamage;
@@ -58,8 +60,69 @@ public class HarpoonEntity extends PersistentProjectileEntity {
             this.dealtDamage = true;
         }
 
+        Entity entity = this.getOwner();
+
+        if ((this.dealtDamage || this.isNoClip()) && entity != null) {
+
+            if (!this.isOwnerAlive()) {
+
+                if (!this.getWorld().isClient && this.pickupType == PickupPermission.ALLOWED) {
+                    this.dropStack(this.asItemStack(), 0.1F);
+                }
+
+                this.discard();
+
+            } else {
+
+                this.setNoClip(true);
+
+                Vec3d vec3d = entity.getEyePos().subtract(this.getPos());
+
+                if (this.getWorld().isClient) {
+                    this.lastRenderY = this.getY();
+                }
+
+                double d = 1.0D;
+                this.setVelocity(this.getVelocity().multiply(0.95).add(vec3d.normalize().multiply(d)));
+
+                if (stuckTo != null) {
+
+                    if (stuckTo.isAlive() && this.getOwner() != null) {
+
+                        boolean inRange = stuckTo.getPos().distanceTo(this.getOwner().getEyePos()) <= 1.0D;
+
+                        this.setPos(this.getX(), this.getY() + vec3d.y * 0.015, this.getZ());
+
+                        stuckTo.setVelocity(this.getVelocity().multiply(0.95).add(vec3d.normalize().multiply(d)));
+
+                        if (inRange) {
+                            stuckTo.setVelocity(Vec3d.ZERO);
+                        }
+
+                    }
+
+                }
+
+                if (this.returnTimer == 0) {
+                    this.playSound(SoundEvents.ITEM_TRIDENT_RETURN, 10.0F, 1.0F);
+                }
+
+                ++this.returnTimer;
+            }
+
+        }
+
         super.tick();
 
+    }
+
+    private boolean isOwnerAlive() {
+        Entity entity = this.getOwner();
+        if (entity != null && entity.isAlive()) {
+            return !(entity instanceof ServerPlayerEntity) || !entity.isSpectator();
+        } else {
+            return false;
+        }
     }
 
     public boolean isEnchanted() {
@@ -73,9 +136,8 @@ public class HarpoonEntity extends PersistentProjectileEntity {
 
     protected void onEntityHit(EntityHitResult entityHitResult) {
         Entity entity = entityHitResult.getEntity();
-        float f = 8.0F;
-        Entity entity2 = this.getOwner();
-        DamageSource damageSource = this.getDamageSources().trident(this, (Entity)(entity2 == null ? this : entity2));
+        float f = 4.0F;
+        DamageSource damageSource = this.getDamageSources().create(BallooniesDamageTypes.HARPOON);
         World var7 = this.getWorld();
         if (var7 instanceof ServerWorld serverWorld) {
             f = EnchantmentHelper.getDamage(serverWorld, this.getWeaponStack(), entity, damageSource, f);
@@ -98,10 +160,17 @@ public class HarpoonEntity extends PersistentProjectileEntity {
                 this.knockback(livingEntity, damageSource);
                 this.onHit(livingEntity);
             }
+
         }
 
-        this.setVelocity(this.getVelocity().multiply(-0.01, -0.1, -0.01));
         this.playSound(SoundEvents.ITEM_TRIDENT_HIT, 1.0F, 1.0F);
+
+    }
+
+    @Override
+    protected void onHit(LivingEntity target) {
+        this.stuckTo = target;
+        super.onHit(target);
     }
 
     protected void onBlockHitEnchantmentEffects(ServerWorld world, BlockHitResult blockHitResult, ItemStack weaponStack) {
@@ -124,11 +193,14 @@ public class HarpoonEntity extends PersistentProjectileEntity {
     }
 
     protected boolean tryPickup(PlayerEntity player) {
-        return super.tryPickup(player) || this.isNoClip() && this.isOwner(player) && player.getInventory().insertStack(this.asItemStack());
+        return super.tryPickup(player)
+                || (this.isNoClip()
+                && this.isOwner(player)
+                && player.getInventory().insertStack(this.asItemStack()));
     }
 
     protected ItemStack getDefaultItemStack() {
-        return new ItemStack(Items.TRIDENT);
+        return new ItemStack(BallooniesItems.HARPOON);
     }
 
     protected SoundEvent getHitSound() {
@@ -152,21 +224,16 @@ public class HarpoonEntity extends PersistentProjectileEntity {
         nbt.putBoolean("DealtDamage", this.dealtDamage);
     }
 
-    private byte getLoyalty(ItemStack stack) {
-        World var3 = this.getWorld();
-        if (var3 instanceof ServerWorld serverWorld) {
-            return (byte) MathHelper.clamp(EnchantmentHelper.getTridentReturnAcceleration(serverWorld, stack, this), 0, 127);
-        } else {
-            return 0;
-        }
-    }
-
     protected float getDragInWater() {
         return 0.99F;
     }
 
     public boolean shouldRender(double cameraX, double cameraY, double cameraZ) {
         return true;
+    }
+
+    public float getBeamTicks() {
+        return (float)this.stringTicks;
     }
 
     static {

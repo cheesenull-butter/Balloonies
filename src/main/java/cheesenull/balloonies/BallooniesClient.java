@@ -23,6 +23,10 @@ public class BallooniesClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 
+//		ModelPredicateProviderRegistry.register(BallooniesItems.FAKE_HARPOON, Identifier.of("thrown"), (stack, world, entity, seed) -> {
+//			return stack.getOrDefault(BallooniesDataComponentTypes.THROWN, false) ? 1.0F : 0.0F;
+//		});
+
 		DistortionShader.init();
 
 		BlockRenderLayerMap.INSTANCE.putBlock(BallooniesBlocks.BLUE_ROSE, RenderLayer.getCutout());

@@ -35,8 +35,11 @@ public abstract class ItemRendererMixin {
             argsOnly = true
     )
     public BakedModel renderItem(BakedModel bakedModel, @Local(argsOnly = true) ItemStack stack, @Local(argsOnly = true) ModelTransformationMode renderMode) {
+
         if (stack.getItem() == BallooniesItems.HARPOON && (renderMode == ModelTransformationMode.GUI || renderMode == ModelTransformationMode.GROUND || renderMode == ModelTransformationMode.FIXED)) {
+
             return getModels().getModelManager().getModel(ModelIdentifier.ofInventoryVariant(Identifier.of(Balloonies.MOD_ID, "harpoon")));
+
         }
 
         return bakedModel;
@@ -48,6 +51,7 @@ public abstract class ItemRendererMixin {
             ordinal = 1
     )
     public BakedModel getHeldItemModelMixin(BakedModel bakedModel, @Local(argsOnly = true) ItemStack stack) {
+
         if (stack.isOf(BallooniesItems.HARPOON)) {
             return this.models.getModelManager().getModel(ModelIdentifier.ofInventoryVariant(Identifier.of(Balloonies.MOD_ID, "harpoon_in_hand")));
         }

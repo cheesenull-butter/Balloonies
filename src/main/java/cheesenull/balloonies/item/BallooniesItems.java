@@ -2,6 +2,7 @@ package cheesenull.balloonies.item;
 
 import cheesenull.balloonies.Balloonies;
 import cheesenull.balloonies.item.custom.BaguetteItem;
+import cheesenull.balloonies.item.custom.OxidizedBladeItem;
 import cheesenull.balloonies.item.custom.QuiverItem;
 import cheesenull.balloonies.item.custom.HarpoonItem;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
@@ -15,7 +16,7 @@ import net.minecraft.util.Rarity;
 public class BallooniesItems {
 
     public static final Item OXIDIZED_BLADE = registerItem("oxidized_blade",
-            new SwordItem(ToolMaterials.IRON, new Item.Settings()
+            new OxidizedBladeItem(ToolMaterials.IRON, new Item.Settings()
                     .rarity(Rarity.RARE)
                     .attributeModifiers(SwordItem
                             .createAttributeModifiers(ToolMaterials.IRON,

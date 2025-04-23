@@ -118,4 +118,9 @@ public class QuiverItem extends Item {
 
     }
 
+    @Override
+    public boolean canRepair(ItemStack stack, ItemStack ingredient) {
+        return ingredient.isOf(Items.LEATHER) || super.canRepair(stack, ingredient);
+    }
+
 }

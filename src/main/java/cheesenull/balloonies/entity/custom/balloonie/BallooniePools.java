@@ -13,6 +13,8 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.FallingBlockEntity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LightningEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.CreeperEntity;
 import net.minecraft.entity.mob.SkeletonEntity;
 import net.minecraft.entity.passive.BatEntity;
@@ -20,6 +22,7 @@ import net.minecraft.entity.projectile.FireworkRocketEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.Hand;
@@ -172,6 +175,25 @@ public class BallooniePools {
                 double velocityY = world.random.nextDouble() * 0.5 + 0.5;
                 double velocityZ = (world.random.nextDouble() - 0.5) * 2;
                 ballooning.setVelocity(velocityX, velocityY, velocityZ);
+
+            }
+
+            ServerWorld serverWorld = (ServerWorld) world;
+
+            for (ServerPlayerEntity player : serverWorld.getPlayers()) {
+
+                BlockPos playerPos = player.getBlockPos();
+
+                double x = playerPos.getX() - pos.getX();
+                double y = playerPos.getY() - pos.getY();
+                double z = playerPos.getZ() - pos.getZ();
+
+                double distance = Math.sqrt(x*x + y*y + z*z);
+
+                if (distance <= 32) {
+                    player.addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS, 200, 0));
+                    player.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 200, 5));
+                }
 
             }
 

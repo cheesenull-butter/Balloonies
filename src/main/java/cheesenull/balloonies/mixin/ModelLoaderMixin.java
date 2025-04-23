@@ -24,6 +24,7 @@ public abstract class ModelLoaderMixin {
     private void onInit(CallbackInfo ci) {
 
         this.loadItemModel(ModelIdentifier.ofInventoryVariant(Identifier.of(Balloonies.MOD_ID, "harpoon_in_hand")));
+        this.loadItemModel(ModelIdentifier.ofInventoryVariant(Identifier.of(Balloonies.MOD_ID, "harpoon_throwing")));
 
     }
 

@@ -16,6 +16,7 @@ import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.ProjectileItem;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundCategory;
@@ -126,6 +127,11 @@ public class HarpoonItem extends Item implements ProjectileItem {
         HarpoonEntity harpoonEntity = new HarpoonEntity(world, pos.getX(), pos.getY(), pos.getZ(), stack.copyWithCount(1));
         harpoonEntity.pickupType = PersistentProjectileEntity.PickupPermission.ALLOWED;
         return harpoonEntity;
+    }
+
+    @Override
+    public boolean canRepair(ItemStack stack, ItemStack ingredient) {
+        return ingredient.isOf(Items.COPPER_INGOT) || super.canRepair(stack, ingredient);
     }
 
 }

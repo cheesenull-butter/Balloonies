@@ -42,7 +42,7 @@ public class BallooniePools {
 
         int pool = ran.nextInt(100);
 
-        world.playSound(null, pos, BallooniesSounds.POP, SoundCategory.NEUTRAL);
+        world.playSound(null, pos, BallooniesSounds.ENTITY_BALLOONIE_POP, SoundCategory.NEUTRAL);
 
         if (pool < 25) {
 
@@ -197,7 +197,7 @@ public class BallooniePools {
 
             }
 
-            world.playSound(null, pos, BallooniesSounds.LOBOTOMY, SoundCategory.HOSTILE);
+            world.playSound(null, pos, BallooniesSounds.ENTITY_BALLOONIE_LOBOTOMY, SoundCategory.HOSTILE);
 
         } else {
 

@@ -34,13 +34,13 @@ public class HarpoonRenderer extends EntityRenderer<HarpoonEntity> {
 
         if (owner != null) {
 
-            float j = entity.getBeamTicks() + g;
+            float j = entity.getStringTicks() + g;
             float k = j * 0.5F % 1.0F;
             float l = entity.getStandingEyeHeight();
 
             matrixStack.push();
 
-            matrixStack.translate(0.0F, l, 0.0F);
+            matrixStack.translate(0.0F, l - 0.5F, 0.0F);
 
             Vec3d vec3d = this.fromLerpedPosition(owner, (double)owner.getHeight() * 0.5, g);
             Vec3d vec3d2 = this.fromLerpedPosition(entity, (double)l, g);

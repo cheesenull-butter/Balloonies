@@ -1,12 +1,11 @@
  package cheesenull.balloonies.item.custom;
 
 import cheesenull.balloonies.entity.custom.HarpoonEntity;
+import cheesenull.balloonies.sound.BallooniesSounds;
 import net.minecraft.block.BlockState;
-import net.minecraft.component.EnchantmentEffectComponentTypes;
 import net.minecraft.component.type.AttributeModifierSlot;
 import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.component.type.ToolComponent;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
@@ -18,10 +17,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.ProjectileItem;
-import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
@@ -65,8 +61,6 @@ public class HarpoonItem extends Item implements ProjectileItem {
 
             if (var6 >= 10) {
 
-                RegistryEntry<SoundEvent> registryEntry = (RegistryEntry)EnchantmentHelper.getEffect(stack, EnchantmentEffectComponentTypes.TRIDENT_SOUND).orElse(SoundEvents.ITEM_TRIDENT_THROW);
-
                 if (!isAboutToBreak(stack)) {
 
                     if (!world.isClient) {
@@ -77,7 +71,7 @@ public class HarpoonItem extends Item implements ProjectileItem {
                         harpoon.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0F, 2.5F, 1.0F);
 
                         world.spawnEntity(harpoon);
-                        world.playSoundFromEntity((PlayerEntity)null, harpoon, (SoundEvent)registryEntry.value(), SoundCategory.PLAYERS, 1.0F, 1.0F);
+                        world.playSoundFromEntity((PlayerEntity)null, harpoon, BallooniesSounds.ITEM_HARPOON_THROW, SoundCategory.PLAYERS, 1.0F, 1.0F);
 
                         playerEntity.getInventory().removeOne(stack);
 

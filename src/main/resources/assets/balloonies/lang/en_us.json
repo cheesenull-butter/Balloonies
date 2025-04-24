@@ -16,5 +16,9 @@
   "itemGroup.balloonies.balloonies_group": "Balloonies",
 
   "subtitles.entity.balloonies.balloonie.lobotomy": "Lobotomy ringing",
-  "subtitles.entity.balloonies.balloonie.pop": "Balloonie pop"
+  "subtitles.entity.balloonies.balloonie.pop": "Balloonie pop",
+  "subtitles.item.balloonies.harpoon.hit": "Harpoon stabs",
+  "subtitles.item.balloonies.harpoon.hit_ground": "Harpoon vibrates",
+  "subtitles.item.balloonies.harpoon.return": "Harpoon returns",
+  "subtitles.item.balloonies.harpoon.throw": "Harpoon clangs"
 }

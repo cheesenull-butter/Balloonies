@@ -3,11 +3,11 @@
     "subtitle": "subtitles.entity.balloonies.balloonie.pop",
     "sounds": [
       {
-        "name": "balloonies:pop1",
+        "name": "balloonies:balloonie/pop1",
         "volume": 20
       },
       {
-        "name": "balloonies:pop2",
+        "name": "balloonies:balloonie/pop2",
         "volume": 20
       }
     ]
@@ -16,8 +16,67 @@
     "subtitle": "subtitles.entity.balloonies.balloonie.lobotomy",
     "sounds": [
       {
-        "name": "balloonies:lobotomy",
+        "name": "balloonies:balloonie/lobotomy",
         "volume": 0.25
+      }
+    ]
+  },
+  "item.harpoon.hit": {
+    "subtitle": "subtitles.item.balloonies.harpoon.hit",
+    "sounds": [
+      {
+        "name": "balloonies:harpoon/hit1"
+      },
+      {
+        "name": "balloonies:harpoon/hit2"
+      },
+      {
+        "name": "balloonies:harpoon/hit3"
+      }
+    ]
+  },
+  "item.harpoon.hit_ground": {
+    "subtitle": "subtitles.item.balloonies.harpoon.hit_ground",
+    "sounds": [
+      {
+        "name": "balloonies:harpoon/hit_ground1"
+      },
+      {
+        "name": "balloonies:harpoon/hit_ground2"
+      },
+      {
+        "name": "balloonies:harpoon/hit_ground3"
+      },
+      {
+        "name": "balloonies:harpoon/hit_ground4"
+      }
+    ]
+  },
+  "item.harpoon.return": {
+    "subtitle": "subtitles.item.balloonies.harpoon.return",
+    "sounds": [
+      {
+        "name": "balloonies:harpoon/return1"
+      },
+      {
+        "name": "balloonies:harpoon/return2"
+      },
+      {
+        "name": "balloonies:harpoon/return3"
+      },
+      {
+        "name": "balloonies:harpoon/return4"
+      }
+    ]
+  },
+  "item.harpoon.throw": {
+    "subtitle": "subtitles.item.balloonies.harpoon.throw",
+    "sounds": [
+      {
+        "name": "balloonies:harpoon/throw1"
+      },
+      {
+        "name": "balloonies:harpoon/throw2"
       }
     ]
   }

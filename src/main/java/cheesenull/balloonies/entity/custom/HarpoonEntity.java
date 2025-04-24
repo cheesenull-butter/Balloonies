@@ -3,6 +3,7 @@ package cheesenull.balloonies.entity.custom;
 import cheesenull.balloonies.client.BallooniesDamageTypes;
 import cheesenull.balloonies.entity.BallooniesEntities;
 import cheesenull.balloonies.item.BallooniesItems;
+import cheesenull.balloonies.sound.BallooniesSounds;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -76,7 +77,7 @@ public class HarpoonEntity extends PersistentProjectileEntity {
 
                 this.setNoClip(true);
 
-                Vec3d vec3d = entity.getEyePos().subtract(this.getPos());
+                Vec3d vec3d = entity.getPos().subtract(this.getPos());
 
                 if (this.getWorld().isClient) {
                     this.lastRenderY = this.getY();
@@ -89,7 +90,7 @@ public class HarpoonEntity extends PersistentProjectileEntity {
 
                     if (stuckTo.isAlive() && this.getOwner() != null) {
 
-                        boolean inRange = stuckTo.getPos().distanceTo(this.getOwner().getEyePos()) <= 1.0D;
+                        boolean inRange = stuckTo.getPos().distanceTo(this.getOwner().getPos()) <= 1.0D;
 
                         this.setPos(this.getX(), this.getY() + vec3d.y * 0.015, this.getZ());
 
@@ -104,7 +105,7 @@ public class HarpoonEntity extends PersistentProjectileEntity {
                 }
 
                 if (this.returnTimer == 0) {
-                    this.playSound(SoundEvents.ITEM_TRIDENT_RETURN, 10.0F, 1.0F);
+                    this.playSound(BallooniesSounds.ITEM_HARPOON_RETURN, 1.0F, 5.0F);
                 }
 
                 ++this.returnTimer;
@@ -163,7 +164,7 @@ public class HarpoonEntity extends PersistentProjectileEntity {
 
         }
 
-        this.playSound(SoundEvents.ITEM_TRIDENT_HIT, 1.0F, 1.0F);
+        this.playSound(BallooniesSounds.ITEM_HARPOON_HIT, 1.0F, 1.0F);
 
     }
 
@@ -204,7 +205,7 @@ public class HarpoonEntity extends PersistentProjectileEntity {
     }
 
     protected SoundEvent getHitSound() {
-        return SoundEvents.ITEM_TRIDENT_HIT_GROUND;
+        return BallooniesSounds.ITEM_HARPOON_HIT_GROUND;
     }
 
     public void onPlayerCollision(PlayerEntity player) {
@@ -232,7 +233,7 @@ public class HarpoonEntity extends PersistentProjectileEntity {
         return true;
     }
 
-    public float getBeamTicks() {
+    public float getStringTicks() {
         return (float)this.stringTicks;
     }
 

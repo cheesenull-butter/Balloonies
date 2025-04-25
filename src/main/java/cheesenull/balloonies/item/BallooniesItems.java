@@ -20,8 +20,7 @@ public class BallooniesItems {
                     .rarity(Rarity.RARE)
                     .attributeModifiers(SwordItem
                             .createAttributeModifiers(ToolMaterials.IRON,
-                                    3, -2.4F))
-                    .food(BallooniesFoodComponents.BAGUETTE)));
+                                    3, -2.4F))));
     public static final Item HARPOON = registerItem("harpoon",
             new HarpoonItem(new Item.Settings()
                     .rarity(Rarity.EPIC)

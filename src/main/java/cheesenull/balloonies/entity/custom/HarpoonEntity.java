@@ -98,6 +98,7 @@ public class HarpoonEntity extends PersistentProjectileEntity {
 
                         if (inRange) {
                             stuckTo.setVelocity(Vec3d.ZERO);
+                            stuckTo = null;
                         }
 
                     }

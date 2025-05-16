@@ -38,6 +38,7 @@ public class BallooniesBlocks {
             entries.addAfter(Blocks.WITHER_ROSE, BLUE_ROSE);
 
         });
+
     }
 
 }

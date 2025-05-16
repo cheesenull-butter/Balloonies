@@ -1,4 +1,5 @@
 {
+
   "block.balloonies.blue_rose": "Blue Rose",
 
   "death.attack.harpoon": "%1$s died while stuck to %2$s",
@@ -21,4 +22,5 @@
   "subtitles.item.balloonies.harpoon.hit_ground": "Harpoon vibrates",
   "subtitles.item.balloonies.harpoon.return": "Harpoon returns",
   "subtitles.item.balloonies.harpoon.throw": "Harpoon clangs"
+
 }

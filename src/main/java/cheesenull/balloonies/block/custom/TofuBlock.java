@@ -4,6 +4,7 @@ import cheesenull.balloonies.item.BallooniesItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.math.BlockPos;
@@ -23,7 +24,16 @@ public class TofuBlock extends Block {
         } else {
 
             entity.handleFallDamage(fallDistance, 0.0F, world.getDamageSources().fall());
-            world.breakBlock(pos, true);
+
+            if (entity instanceof PlayerEntity player) {
+
+                if (player.isCreative()) {
+                    world.breakBlock(pos, false);
+                } else {
+                    world.breakBlock(pos, true);
+                }
+
+            }
 
         }
 

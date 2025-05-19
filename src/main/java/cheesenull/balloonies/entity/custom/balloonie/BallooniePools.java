@@ -73,21 +73,44 @@ public class BallooniePools {
 
         } else if (pool < 40) {
 
-            for (int x = 0; x < 2; x++) {
-                for (int y = 0; y < 2; y++) {
-                    for (int z = 0; z < 2; z++) {
+            if (ran.nextBoolean()) {
 
-                        FallingBlockEntity blockEntity =
-                                FallingBlockEntity.spawnFromBlock(world, pos.add(x, y, z),
-                                        Blocks.BOOKSHELF.getDefaultState());
-                        ItemStack itemStack = new ItemStack(Items.BOOK);
+                for (int x = 0; x < 2; x++) {
+                    for (int y = 0; y < 2; y++) {
+                        for (int z = 0; z < 2; z++) {
 
-                        world.spawnEntity(blockEntity);
-                        world.spawnEntity(new ItemEntity(world,
-                                pos.getX(), pos.getY(), pos.getZ(), itemStack));
+                            FallingBlockEntity blockEntity =
+                                    FallingBlockEntity.spawnFromBlock(world, pos.add(x, y, z),
+                                            Blocks.BOOKSHELF.getDefaultState());
+                            ItemStack itemStack = new ItemStack(Items.BOOK);
 
+                            world.spawnEntity(blockEntity);
+                            world.spawnEntity(new ItemEntity(world,
+                                    pos.getX(), pos.getY(), pos.getZ(), itemStack));
+
+                        }
                     }
                 }
+
+            } else {
+
+                for (int x = 0; x < 2; x++) {
+                    for (int y = 0; y < 2; y++) {
+                        for (int z = 0; z < 2; z++) {
+
+                            FallingBlockEntity blockEntity =
+                                    FallingBlockEntity.spawnFromBlock(world, pos.add(x, y, z),
+                                            BallooniesBlocks.TOFU_BLOCK.getDefaultState());
+                            ItemStack itemStack = new ItemStack(BallooniesItems.TOFU);
+
+                            world.spawnEntity(blockEntity);
+                            world.spawnEntity(new ItemEntity(world,
+                                    pos.getX(), pos.getY(), pos.getZ(), itemStack));
+
+                        }
+                    }
+                }
+
             }
 
         } else if (pool < 60) {

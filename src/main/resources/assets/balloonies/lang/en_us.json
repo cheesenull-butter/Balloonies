@@ -1,6 +1,7 @@
 {
 
   "block.balloonies.blue_rose": "Blue Rose",
+  "block.balloonies.tofu_block": "Block of Tofu",
 
   "death.attack.harpoon": "%1$s died while stuck to %2$s",
 
@@ -13,6 +14,7 @@
   "item.balloonies.harpoon": "Harpoon",
   "item.balloonies.oxidized_blade": "Oxidized Blade",
   "item.balloonies.quiver": "Quiver",
+  "item.balloonies.tofu": "Tofu",
 
   "itemGroup.balloonies.balloonies_group": "Balloonies",
 

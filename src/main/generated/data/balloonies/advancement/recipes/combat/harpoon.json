@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_oxidized_blade": {
+      "conditions": {
+        "items": [
+          {
+            "items": "balloonies:oxidized_blade"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "balloonies:harpoon"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_oxidized_blade"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "balloonies:harpoon"
+    ]
+  }
+}

@@ -19,11 +19,14 @@ public class BallooniesCreativeTabs {
                     .entries((displayContext, entries) -> {
 
                         entries.add(BallooniesBlocks.BLUE_ROSE);
+                        entries.add(BallooniesBlocks.TOFU_BLOCK);
 
                         entries.add(BallooniesItems.OXIDIZED_BLADE);
                         entries.add(BallooniesItems.BAGUETTE);
                         entries.add(BallooniesItems.HARPOON);
                         entries.add(BallooniesItems.QUIVER);
+
+                        entries.add(BallooniesItems.TOFU);
 
                     }).build());
 

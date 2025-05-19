@@ -1,6 +1,7 @@
 package cheesenull.balloonies.block;
 
 import cheesenull.balloonies.Balloonies;
+import cheesenull.balloonies.block.custom.TofuBlock;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.*;
 import net.minecraft.entity.effect.StatusEffects;
@@ -9,6 +10,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 
 public class BallooniesBlocks {
@@ -19,6 +21,11 @@ public class BallooniesBlocks {
     public static final Block POTTED_BLUE_ROSE = Registry.register(Registries.BLOCK,
             Identifier.of(Balloonies.MOD_ID, "potted_blue_rose"),
             new FlowerPotBlock(BLUE_ROSE, AbstractBlock.Settings.copy(Blocks.POTTED_POPPY).nonOpaque()));
+
+    public static final Block TOFU_BLOCK = registerBlock("tofu_block",
+            new TofuBlock(AbstractBlock.Settings.create()
+                            .mapColor(MapColor.OFF_WHITE)
+                            .sounds(BlockSoundGroup.HONEY)));
 
     private static Block registerBlock(String name, Block block) {
         registerBlockItem(name, block);
@@ -36,6 +43,7 @@ public class BallooniesBlocks {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.NATURAL).register(entries -> {
 
             entries.addAfter(Blocks.WITHER_ROSE, BLUE_ROSE);
+            entries.addBefore(Blocks.SLIME_BLOCK, TOFU_BLOCK);
 
         });
 

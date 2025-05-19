@@ -38,6 +38,10 @@ public class BallooniesItems {
                             .createAttributeModifiers(ToolMaterials.WOOD,
                                     2, -2.4F))
                     .food(BallooniesFoodComponents.BAGUETTE)));
+    public static final Item TOFU = registerItem("tofu",
+            new Item(new Item.Settings()
+                    .food(BallooniesFoodComponents.TOFU)));
+
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, Identifier.of(Balloonies.MOD_ID, name), item);
@@ -54,7 +58,10 @@ public class BallooniesItems {
         });
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register(entries -> {
+
             entries.addBefore(Items.BREAD, BAGUETTE);
+            entries.addAfter(Items.MUSHROOM_STEM, TOFU);
+
         });
 
     }

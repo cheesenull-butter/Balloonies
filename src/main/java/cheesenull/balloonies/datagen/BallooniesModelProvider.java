@@ -8,6 +8,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.ItemModelGenerator;
 import net.minecraft.data.client.Models;
+import net.minecraft.util.Identifier;
 
 public class BallooniesModelProvider extends FabricModelProvider {
 
@@ -30,6 +31,8 @@ public class BallooniesModelProvider extends FabricModelProvider {
 
         itemModelGenerator.register(BallooniesItems.QUIVER, Models.HANDHELD);
         itemModelGenerator.register(BallooniesItems.BAGUETTE, Models.HANDHELD);
+
+        itemModelGenerator.register(BallooniesItems.TOFU, Models.HANDHELD);
 
     }
 

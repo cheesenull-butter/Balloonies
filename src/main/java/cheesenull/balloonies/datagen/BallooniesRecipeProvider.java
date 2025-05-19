@@ -35,5 +35,8 @@ public class BallooniesRecipeProvider extends FabricRecipeProvider {
                 .criterion("has_oxidized_blade", conditionsFromItem(BallooniesItems.OXIDIZED_BLADE))
                 .offerTo(exporter);
 
+        offerReversibleCompactingRecipesWithReverseRecipeGroup(exporter, RecipeCategory.FOOD, BallooniesItems.TOFU, RecipeCategory.MISC, BallooniesBlocks.TOFU_BLOCK, "tofu_from_tofu_block", "tofu");
+
     }
+
 }

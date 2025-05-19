@@ -8,4 +8,8 @@ public class BallooniesFoodComponents {
             .nutrition(8)
             .saturationModifier(0.6F).build();
 
+    public static final FoodComponent TOFU = new FoodComponent.Builder()
+            .nutrition(2)
+            .saturationModifier(0.1F).build();
+
 }

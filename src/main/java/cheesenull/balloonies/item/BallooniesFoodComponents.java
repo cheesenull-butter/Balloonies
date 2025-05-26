@@ -11,5 +11,8 @@ public class BallooniesFoodComponents {
     public static final FoodComponent TOFU = new FoodComponent.Builder()
             .nutrition(2)
             .saturationModifier(0.1F).build();
+    public static final FoodComponent FERMENTED_TOFU = new FoodComponent.Builder()
+            .nutrition(2)
+            .saturationModifier(0.1F).build();
 
 }

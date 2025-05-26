@@ -5,11 +5,13 @@ import cheesenull.balloonies.item.BallooniesItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
+import net.minecraft.block.Blocks;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.ItemModelGenerator;
 import net.minecraft.data.client.Models;
 import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryWrapper;
@@ -35,7 +37,16 @@ public class BallooniesRecipeProvider extends FabricRecipeProvider {
                 .criterion("has_oxidized_blade", conditionsFromItem(BallooniesItems.OXIDIZED_BLADE))
                 .offerTo(exporter);
 
-        offerReversibleCompactingRecipesWithReverseRecipeGroup(exporter, RecipeCategory.FOOD, BallooniesItems.TOFU, RecipeCategory.MISC, BallooniesBlocks.TOFU_BLOCK, "tofu_from_tofu_block", "tofu");
+        offerReversibleCompactingRecipesWithReverseRecipeGroup(exporter, RecipeCategory.FOOD,
+                BallooniesItems.TOFU, RecipeCategory.MISC, BallooniesBlocks.TOFU_BLOCK,
+                "tofu_from_tofu_block", "tofu");
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.FOOD, BallooniesItems.FERMENTED_TOFU)
+                .input(BallooniesItems.TOFU)
+                .input(Blocks.BROWN_MUSHROOM)
+                .input(Items.SUGAR)
+                .criterion("has_tofu", conditionsFromItem(BallooniesItems.TOFU))
+                .offerTo(exporter);
+
 
     }
 

@@ -33,6 +33,7 @@ public class BallooniesModelProvider extends FabricModelProvider {
         itemModelGenerator.register(BallooniesItems.BAGUETTE, Models.HANDHELD);
 
         itemModelGenerator.register(BallooniesItems.TOFU, Models.HANDHELD);
+        itemModelGenerator.register(BallooniesItems.FERMENTED_TOFU, Models.HANDHELD);
 
     }
 

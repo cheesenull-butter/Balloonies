@@ -1,10 +1,7 @@
 package cheesenull.balloonies.item;
 
 import cheesenull.balloonies.Balloonies;
-import cheesenull.balloonies.item.custom.BaguetteItem;
-import cheesenull.balloonies.item.custom.OxidizedBladeItem;
-import cheesenull.balloonies.item.custom.QuiverItem;
-import cheesenull.balloonies.item.custom.HarpoonItem;
+import cheesenull.balloonies.item.custom.*;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.item.*;
@@ -38,9 +35,13 @@ public class BallooniesItems {
                             .createAttributeModifiers(ToolMaterials.WOOD,
                                     2, -2.4F))
                     .food(BallooniesFoodComponents.BAGUETTE)));
+
     public static final Item TOFU = registerItem("tofu",
             new Item(new Item.Settings()
                     .food(BallooniesFoodComponents.TOFU)));
+    public static final Item FERMENTED_TOFU = registerItem("fermented_tofu",
+            new FermentedTofuItem(new Item.Settings()
+                    .food(BallooniesFoodComponents.FERMENTED_TOFU)));
 
 
     private static Item registerItem(String name, Item item) {
@@ -61,6 +62,7 @@ public class BallooniesItems {
 
             entries.addBefore(Items.BREAD, BAGUETTE);
             entries.addAfter(Items.MUSHROOM_STEM, TOFU);
+            entries.addAfter(TOFU, FERMENTED_TOFU);
 
         });
 

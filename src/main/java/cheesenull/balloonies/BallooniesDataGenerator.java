@@ -1,5 +1,6 @@
 package cheesenull.balloonies;
 
+import cheesenull.balloonies.datagen.BallooniesItemTagProvider;
 import cheesenull.balloonies.datagen.BallooniesLootTableProvider;
 import cheesenull.balloonies.datagen.BallooniesModelProvider;
 import cheesenull.balloonies.datagen.BallooniesRecipeProvider;
@@ -12,7 +13,9 @@ public class BallooniesDataGenerator implements DataGeneratorEntrypoint {
 
 		FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
 
-
+		pack.addProvider((output, registries) ->
+				new BallooniesItemTagProvider(output, registries, null)
+		);
 		pack.addProvider(BallooniesLootTableProvider::new);
 		pack.addProvider(BallooniesModelProvider::new);
 		pack.addProvider(BallooniesRecipeProvider::new);

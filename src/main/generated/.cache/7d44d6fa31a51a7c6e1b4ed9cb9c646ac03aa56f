@@ -1,7 +1,9 @@
-// 1.21.1	2025-05-19T18:27:42.1346093	Balloonies/Recipes
+// 1.21.1	2025-05-26T20:13:38.2728206	Balloonies/Recipes
 0bcf4fa0557664a9aabc7b0711f7064fe065b6e3 data\balloonies\advancement\recipes\combat\harpoon.json
 a84eb8cf2b2d5368f87ae041e35f3a4aa1b489be data\balloonies\recipe\harpoon.json
 a06bf6ab24e6338254c3a7392230ae4dfdc6d4d8 data\balloonies\advancement\recipes\misc\tofu_block.json
+aa1b69c374f27a1fc5ee02eeaeded07bdcd202f0 data\balloonies\recipe\fermented_tofu.json
 3e652a4587ea76a2d318c1dcbf8e3d3f94717a95 data\balloonies\advancement\recipes\food\tofu_from_tofu_block.json
 bc7cc95b84b0015bf2b86f21612426dfe6fc95c7 data\balloonies\recipe\tofu_block.json
 1c96f8e8076d09b8f149905f9372114a91a22558 data\balloonies\recipe\tofu_from_tofu_block.json
+cc46cde2e0a08a66c4ee7301620b9e08dffc19f1 data\balloonies\advancement\recipes\food\fermented_tofu.json

@@ -27,6 +27,7 @@ public class BallooniesCreativeTabs {
                         entries.add(BallooniesItems.QUIVER);
 
                         entries.add(BallooniesItems.TOFU);
+                        entries.add(BallooniesItems.FERMENTED_TOFU);
 
                     }).build());
 

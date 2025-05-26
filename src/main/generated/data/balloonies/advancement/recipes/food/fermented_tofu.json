@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "balloonies:fermented_tofu"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_tofu": {
+      "conditions": {
+        "items": [
+          {
+            "items": "balloonies:tofu"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_tofu"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "balloonies:fermented_tofu"
+    ]
+  }
+}

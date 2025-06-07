@@ -139,7 +139,7 @@ public class HarpoonEntity extends PersistentProjectileEntity {
     protected void onEntityHit(EntityHitResult entityHitResult) {
         Entity entity = entityHitResult.getEntity();
         float f = 4.0F;
-        DamageSource damageSource = this.getDamageSources().create(BallooniesDamageTypes.HARPOON);
+        DamageSource damageSource = this.getDamageSources().create(BallooniesDamageTypes.HARPOON, this);
         World var7 = this.getWorld();
         if (var7 instanceof ServerWorld serverWorld) {
             f = EnchantmentHelper.getDamage(serverWorld, this.getWeaponStack(), entity, damageSource, f);

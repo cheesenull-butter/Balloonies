@@ -3,12 +3,13 @@
   "block.balloonies.blue_rose": "Blue Rose",
   "block.balloonies.tofu_block": "Block of Tofu",
 
-  "death.attack.harpoon": "%1$s died while stuck to %2$s",
+  "death.attack.harpoon": "%1$s was impaled by %2$s",
 
   "effect.balloonies.distortion": "Distortion",
 
   "entity.balloonies.balloonie": "Balloonie",
   "entity.balloonies.ballooning": "Ballooning",
+  "entity.balloonies.harpoon": "Harpoon",
 
   "item.balloonies.baguette": "Baguette",
   "item.balloonies.fermented_tofu": "Fermented Tofu",

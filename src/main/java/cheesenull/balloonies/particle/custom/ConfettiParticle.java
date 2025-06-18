@@ -7,7 +7,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class ConfettiParticle extends SpriteBillboardParticle {
 
-    private float rotationSpeed;
+    private final float rotationSpeed;
 
     public ConfettiParticle(ClientWorld clientWorld, double x, double y, double z,
                             SpriteProvider spriteProvider, double xSpeed, double ySpeed, double zSpeed) {
@@ -40,7 +40,6 @@ public class ConfettiParticle extends SpriteBillboardParticle {
         super.tick();
 
         this.prevAngle = this.angle;
-
         this.angle += this.rotationSpeed;
 
         this.move(this.velocityX, this.velocityY, this.velocityZ);

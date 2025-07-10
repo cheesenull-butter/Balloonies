@@ -1,11 +1,9 @@
 package cheesenull.balloonies.datagen;
 
-import cheesenull.balloonies.Balloonies;
 import cheesenull.balloonies.block.BallooniesBlocks;
 import cheesenull.balloonies.item.BallooniesItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
-import net.minecraft.item.Item;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.entry.ItemEntry;
@@ -15,9 +13,9 @@ import net.minecraft.registry.RegistryWrapper;
 
 import java.util.concurrent.CompletableFuture;
 
-public class BallooniesLootTableProvider extends FabricBlockLootTableProvider {
+public class BallooniesBlockLootTableProvider extends FabricBlockLootTableProvider {
 
-    public BallooniesLootTableProvider(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+    public BallooniesBlockLootTableProvider(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
         super(dataOutput, registryLookup);
     }
 

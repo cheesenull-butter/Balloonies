@@ -9,10 +9,7 @@ import cheesenull.balloonies.sound.BallooniesSounds;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FarmlandBlock;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.FallingBlockEntity;
-import net.minecraft.entity.ItemEntity;
-import net.minecraft.entity.LightningEntity;
+import net.minecraft.entity.*;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.CreeperEntity;
@@ -38,7 +35,7 @@ public class BallooniePools {
 
     public BallooniePools() {}
 
-    public void ballooniePool(World world, BlockPos pos) {
+    public void ballooniePool(World world, BlockPos pos, Entity entity) {
 
         int pool = ran.nextInt(100);
 
@@ -51,24 +48,15 @@ public class BallooniePools {
             ItemStack itemStack = new ItemStack(ranItem);
 
             if (Arrays.asList(balItemPools.singlePools).contains(ranItem)) {
-
-                world.spawnEntity(new ItemEntity(world,
-                        pos.getX(), pos.getY(), pos.getZ(), itemStack));
-
+                entity.dropStack(new ItemStack(itemStack.getItem()));
             } else if (Arrays.asList(balItemPools.sextuplePools).contains(ranItem)) {
-
                 for (int i = ran.nextInt(6); i < 6; i++) {
-                    world.spawnEntity(new ItemEntity(world,
-                            pos.getX(), pos.getY(), pos.getZ(), itemStack));
+                    entity.dropStack(new ItemStack(itemStack.getItem()));
                 }
-
             } else {
-
                 for (int i = ran.nextInt(3); i < 3; i++) {
-                    world.spawnEntity(new ItemEntity(world,
-                            pos.getX(), pos.getY(), pos.getZ(), itemStack));
+                    entity.dropStack(new ItemStack(itemStack.getItem()));
                 }
-
             }
 
         } else if (pool < 40) {
@@ -82,11 +70,9 @@ public class BallooniePools {
                             FallingBlockEntity blockEntity =
                                     FallingBlockEntity.spawnFromBlock(world, pos.add(x, y, z),
                                             Blocks.BOOKSHELF.getDefaultState());
-                            ItemStack itemStack = new ItemStack(Items.BOOK);
 
                             world.spawnEntity(blockEntity);
-                            world.spawnEntity(new ItemEntity(world,
-                                    pos.getX(), pos.getY(), pos.getZ(), itemStack));
+                            entity.dropStack(new ItemStack(Items.BOOK));
 
                         }
                     }
@@ -101,11 +87,9 @@ public class BallooniePools {
                             FallingBlockEntity blockEntity =
                                     FallingBlockEntity.spawnFromBlock(world, pos.add(x, y, z),
                                             BallooniesBlocks.TOFU_BLOCK.getDefaultState());
-                            ItemStack itemStack = new ItemStack(BallooniesItems.TOFU);
 
                             world.spawnEntity(blockEntity);
-                            world.spawnEntity(new ItemEntity(world,
-                                    pos.getX(), pos.getY(), pos.getZ(), itemStack));
+                            entity.dropStack(new ItemStack(BallooniesItems.TOFU));
 
                         }
                     }
@@ -179,7 +163,7 @@ public class BallooniePools {
 
     }
 
-    public void whiteBallooniePool(World world, BlockPos pos) {
+    public void whiteBallooniePool(World world, BlockPos pos, Entity entity) {
 
         int whitePool = ran.nextInt(10);
 
@@ -229,17 +213,9 @@ public class BallooniePools {
             switch (insidePool) {
 
                 case 0:
-
-                    ItemStack blueRose = new ItemStack(BallooniesBlocks.BLUE_ROSE.asItem());
-                    world.spawnEntity(new ItemEntity(world,
-                            pos.getX(), pos.getY(), pos.getZ(), blueRose));
-
+                    entity.dropStack(new ItemStack(BallooniesBlocks.BLUE_ROSE.asItem()));
                 case 1:
-
-                    ItemStack quiver = new ItemStack(BallooniesItems.QUIVER);
-                    world.spawnEntity(new ItemEntity(world,
-                            pos.getX(), pos.getY(), pos.getZ(), quiver));
-
+                    entity.dropStack(new ItemStack(BallooniesItems.QUIVER));
             }
 
         }

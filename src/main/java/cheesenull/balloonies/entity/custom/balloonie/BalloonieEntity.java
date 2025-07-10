@@ -69,9 +69,9 @@ public class BalloonieEntity extends FlyingEntity {
             if (!getWorld().isClient()) {
 
                 if (getTypeVariant() == 4) {
-                    balPools.whiteBallooniePool(getWorld(), getBlockPos());
+                    balPools.whiteBallooniePool(getWorld(), getBlockPos(), this);
                 } else {
-                    balPools.ballooniePool(getWorld(), getBlockPos());
+                    balPools.ballooniePool(getWorld(), getBlockPos(), this);
                 }
 
                 discard();

@@ -27,18 +27,12 @@ public class BallooniesLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(BallooniesBlocks.BLUE_ROSE);
         addPottedPlantDrops(BallooniesBlocks.POTTED_BLUE_ROSE);
 
-        addDrop(BallooniesBlocks.TOFU_BLOCK, tofuDrops(BallooniesItems.TOFU, 9));
-
-    }
-
-    private LootTable.Builder tofuDrops(Item item, int count) {
-        return LootTable.builder()
+        addDrop(BallooniesBlocks.TOFU_BLOCK, LootTable.builder()
                 .pool(LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
-                        .with(ItemEntry.builder(item)
-                                .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(count)))
-                        )
-                );
+                        .with(ItemEntry.builder(BallooniesItems.TOFU)
+                                .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(9))))));
+
     }
 
 }

@@ -30,10 +30,7 @@ public class BaguetteItem extends SwordItem {
 
             EquipmentSlot slot = hand == Hand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
 
-
-            ItemStack bread = new ItemStack(Items.BREAD, 2);
-            attacker.getWorld().spawnEntity(new ItemEntity(attacker.getWorld(),
-                    attacker.getX(), attacker.getY(), attacker.getZ(), bread));
+            attacker.dropItem(Items.BREAD, 2);
 
             stack.damage(59, attacker, slot);
 
@@ -52,10 +49,7 @@ public class BaguetteItem extends SwordItem {
 
             EquipmentSlot slot = hand == Hand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
 
-
-            ItemStack bread = new ItemStack(Items.BREAD, 2);
-            miner.getWorld().spawnEntity(new ItemEntity(miner.getWorld(),
-                    miner.getX(), miner.getY(), miner.getZ(), bread));
+            miner.dropItem(Items.BREAD, 2);
 
             stack.damage(59, miner, slot);
 
